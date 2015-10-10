@@ -3,24 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Hexo部署时提示Fatal： Could not read from remote repository的问题处理 | iDealife</title>
+  <title>Tag: Xib | iDealife</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="第一次在Mac中配置好了hexo,发布的时候却一直提示：Error: Permission denied (publickey).
-fatal: Could not read from remote repository.分析这个错误提示大致可以推断出是公钥配置的问题引起的。
-但是github中我已经配置好了当前的公钥信息了，再次检查公钥。0、github中公钥重新配置了一遍1、git clone">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Hexo部署时提示Fatal： Could not read from remote repository的问题处理">
-<meta property="og:url" content="http://idealife.github.io/2015/10/02/Hexo部署时提示fatal-Could-not-read-from-remote-repository的问题处理/index.html">
+  <meta name="description" content="Keep moving! Code for life!">
+<meta property="og:type" content="website">
+<meta property="og:title" content="iDealife">
+<meta property="og:url" content="http://idealife.github.io/tags/Xib/index.html">
 <meta property="og:site_name" content="iDealife">
-<meta property="og:description" content="第一次在Mac中配置好了hexo,发布的时候却一直提示：Error: Permission denied (publickey).
-fatal: Could not read from remote repository.分析这个错误提示大致可以推断出是公钥配置的问题引起的。
-但是github中我已经配置好了当前的公钥信息了，再次检查公钥。0、github中公钥重新配置了一遍1、git clone">
-<meta property="og:updated_time" content="2015-10-02T12:12:28.000Z">
+<meta property="og:description" content="Keep moving! Code for life!">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo部署时提示Fatal： Could not read from remote repository的问题处理">
-<meta name="twitter:description" content="第一次在Mac中配置好了hexo,发布的时候却一直提示：Error: Permission denied (publickey).
-fatal: Could not read from remote repository.分析这个错误提示大致可以推断出是公钥配置的问题引起的。
-但是github中我已经配置好了当前的公钥信息了，再次检查公钥。0、github中公钥重新配置了一遍1、git clone">
+<meta name="twitter:title" content="iDealife">
+<meta name="twitter:description" content="Keep moving! Code for life!">
   
     <link rel="alternative" href="/atom.xml" title="iDealife" type="application/atom+xml">
   
@@ -72,94 +65,40 @@ fatal: Could not read from remote repository.分析这个错误提示大致可�
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Hexo部署时提示fatal-Could-not-read-from-remote-repository的问题处理" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/10/02/Hexo部署时提示fatal-Could-not-read-from-remote-repository的问题处理/" class="article-date">
-  <time datetime="2015-10-02T01:41:26.000Z" itemprop="datePublished">2015-10-02</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Hexo/">Hexo</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+        <section id="main">
   
-    <h1 class="article-title" itemprop="name">
-      Hexo部署时提示Fatal： Could not read from remote repository的问题处理
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2015" class="archive-year">2015</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2015/10/10/对xib设计界面中File-s-Owner以及Objects的理解/" class="archive-article-date">
+  <time datetime="2015-10-10T03:50:23.000Z" itemprop="datePublished">Oct 10</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2015/10/10/对xib设计界面中File-s-Owner以及Objects的理解/">对xib设计界面中File&#39;s Owner以及Objects的理解</a>
     </h1>
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>第一次在Mac中配置好了hexo,发布的时候却一直提示：<br><code>Error: Permission denied (publickey).
-fatal: Could not read from remote repository.</code><br>分析这个错误提示大致可以推断出是公钥配置的问题引起的。</p>
-<p>但是github中我已经配置好了当前的公钥信息了，再次检查公钥。<br>0、github中公钥重新配置了一遍<br>1、git clone可以正确执行。<br>2、ssh -T idealife@github.com<br>也提示：Hi defnngj You’ve successfully authenticated, but GitHub does not provide shell access.<br>说明配置的公钥没有问题。<br>就是在执行sudo hexo deploy的时候报公钥问题。<br><a id="more"></a><br>为什么要加sudo呢？<br>在执行hexo命令时，如果不提权，就会一直提示db.json文件的写权限的错误：<br><code>Unhandled rejection Error: EACCES: permission denied, open &#39;/Users/idealife/Developer/blog/db.json&#39;
-    at Error (native)</code><br>所以进行了权限提升。<br>以前一直是在window环境中配置，对于权限的认识比较浅。突然意识到，就是sudo引起的问题。</p>
-<p>因为我生成公钥的命令是ssh-keygen -t rsa -C “idealife@github.com”<br>没有加sudo，生成的公钥是当前用户的，路径是 /Users/idealife/.ssh。而sudo hexo deploy命令执行的时候应该会去读取的root用户的公钥，很显然root下还没有对应的公钥信息生成。</p>
-<p>随即立即验证这个推测。<br>1、为root生成publickey:sudo ssh-keygen -t rsa -C “idealife@github.com”，对应路径为/var/root/.ssh<br>2、提取公钥信息并配置到github中。问题又来了，在UI界面中是无法访问到/var下的root文件夹的。我们可以通过sudo cat /var/root/.ssh/id_rsa.pub可以绕开这个问题。<br>3、执行sudo hexo deploy，部署成功！</p>
-<p>总结：在Linux或者UNIX环境中一定要注意权限问题！</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://idealife.github.io/2015/10/02/Hexo部署时提示fatal-Could-not-read-from-remote-repository的问题处理/" data-id="cifkl6wbq000wyzoqhb89c3ln" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/">Hexo</a></li></ul>
-
-    </footer>
+    </header>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2015/10/02/Apple-Watch远程通知的实现以及真机实测/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">前一篇</strong>
-      <div class="article-nav-title">
-        
-          Apple Watch远程通知的实现以及真机实测
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2015/10/01/Wacth-app无法在Watch-OS2-0中安装的问题探索/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">后一篇</strong>
-      <div class="article-nav-title">Wacth app无法在watchOS2.0中安装的问题探索</div>
-    </a>
-  
-</nav>
-
-  
 </article>
-
   
-  <section id="comments">
-    <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="post-Hexo部署时提示fatal-Could-not-read-from-remote-repository的问题处理" data-title="Hexo部署时提示Fatal： Could not read from remote repository的问题处理" data-url="http://idealife.github.io/2015/10/02/Hexo部署时提示fatal-Could-not-read-from-remote-repository的问题处理/"></div>
-    <!-- 多说评论框 end -->
-    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-    <script type="text/javascript">
-    var duoshuoQuery = {short_name:'idealife'};
-      (function() {
-        var ds = document.createElement('script');
-        ds.type = 'text/javascript';ds.async = true;
-        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-        ds.charset = 'UTF-8';
-        (document.getElementsByTagName('head')[0] 
-         || document.getElementsByTagName('body')[0]).appendChild(ds);
-      })();
-      </script>
-    <!-- 多说公共JS代码 end -->
-  </section>
-  </section>
+  
+    </div></section>
+  
+</section>
         
           <aside id="sidebar">
   

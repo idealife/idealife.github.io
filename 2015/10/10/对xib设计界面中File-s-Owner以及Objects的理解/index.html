@@ -3,24 +3,20 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Hexo部署时提示Fatal： Could not read from remote repository的问题处理 | iDealife</title>
+  <title>对xib设计界面中File&#39;s Owner以及Objects的理解 | iDealife</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="第一次在Mac中配置好了hexo,发布的时候却一直提示：Error: Permission denied (publickey).
-fatal: Could not read from remote repository.分析这个错误提示大致可以推断出是公钥配置的问题引起的。
-但是github中我已经配置好了当前的公钥信息了，再次检查公钥。0、github中公钥重新配置了一遍1、git clone">
+  <meta name="description" content="File’s Owner以及Objects在设计界面中的设置虽然大大地方便了程序开发，可以用更少的代码，实现复杂的功能。但是对接触不久的开发者来说，会增加很多的迷惑性，学习成本相对高了。另一方面对于这些的理解和使用很多资料中也只是一笔带过。File’s OwnerFile’s Owner只是设计时的占位符，只有程序运行时，谁加载了此xib文件，谁才是其Owner。可以在加载的代码initWithW">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo部署时提示Fatal： Could not read from remote repository的问题处理">
-<meta property="og:url" content="http://idealife.github.io/2015/10/02/Hexo部署时提示fatal-Could-not-read-from-remote-repository的问题处理/index.html">
+<meta property="og:title" content="对xib设计界面中File's Owner以及Objects的理解">
+<meta property="og:url" content="http://idealife.github.io/2015/10/10/对xib设计界面中File-s-Owner以及Objects的理解/index.html">
 <meta property="og:site_name" content="iDealife">
-<meta property="og:description" content="第一次在Mac中配置好了hexo,发布的时候却一直提示：Error: Permission denied (publickey).
-fatal: Could not read from remote repository.分析这个错误提示大致可以推断出是公钥配置的问题引起的。
-但是github中我已经配置好了当前的公钥信息了，再次检查公钥。0、github中公钥重新配置了一遍1、git clone">
-<meta property="og:updated_time" content="2015-10-02T12:12:28.000Z">
+<meta property="og:description" content="File’s Owner以及Objects在设计界面中的设置虽然大大地方便了程序开发，可以用更少的代码，实现复杂的功能。但是对接触不久的开发者来说，会增加很多的迷惑性，学习成本相对高了。另一方面对于这些的理解和使用很多资料中也只是一笔带过。File’s OwnerFile’s Owner只是设计时的占位符，只有程序运行时，谁加载了此xib文件，谁才是其Owner。可以在加载的代码initWithW">
+<meta property="og:image" content="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/3_2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/3_1.png">
+<meta property="og:updated_time" content="2015-10-10T04:32:37.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo部署时提示Fatal： Could not read from remote repository的问题处理">
-<meta name="twitter:description" content="第一次在Mac中配置好了hexo,发布的时候却一直提示：Error: Permission denied (publickey).
-fatal: Could not read from remote repository.分析这个错误提示大致可以推断出是公钥配置的问题引起的。
-但是github中我已经配置好了当前的公钥信息了，再次检查公钥。0、github中公钥重新配置了一遍1、git clone">
+<meta name="twitter:title" content="对xib设计界面中File's Owner以及Objects的理解">
+<meta name="twitter:description" content="File’s Owner以及Objects在设计界面中的设置虽然大大地方便了程序开发，可以用更少的代码，实现复杂的功能。但是对接触不久的开发者来说，会增加很多的迷惑性，学习成本相对高了。另一方面对于这些的理解和使用很多资料中也只是一笔带过。File’s OwnerFile’s Owner只是设计时的占位符，只有程序运行时，谁加载了此xib文件，谁才是其Owner。可以在加载的代码initWithW">
   
     <link rel="alternative" href="/atom.xml" title="iDealife" type="application/atom+xml">
   
@@ -72,14 +68,14 @@ fatal: Could not read from remote repository.分析这个错误提示大致可�
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Hexo部署时提示fatal-Could-not-read-from-remote-repository的问题处理" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-对xib设计界面中File-s-Owner以及Objects的理解" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/10/02/Hexo部署时提示fatal-Could-not-read-from-remote-repository的问题处理/" class="article-date">
-  <time datetime="2015-10-02T01:41:26.000Z" itemprop="datePublished">2015-10-02</time>
+    <a href="/2015/10/10/对xib设计界面中File-s-Owner以及Objects的理解/" class="article-date">
+  <time datetime="2015-10-10T03:50:23.000Z" itemprop="datePublished">2015-10-10</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Hexo/">Hexo</a>
+    <a class="article-category-link" href="/categories/iDev/">iDev</a>
   </div>
 
   </div>
@@ -90,7 +86,7 @@ fatal: Could not read from remote repository.分析这个错误提示大致可�
         
   
     <h1 class="article-title" itemprop="name">
-      Hexo部署时提示Fatal： Could not read from remote repository的问题处理
+      对xib设计界面中File&#39;s Owner以及Objects的理解
     </h1>
   
 
@@ -98,21 +94,16 @@ fatal: Could not read from remote repository.分析这个错误提示大致可�
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>第一次在Mac中配置好了hexo,发布的时候却一直提示：<br><code>Error: Permission denied (publickey).
-fatal: Could not read from remote repository.</code><br>分析这个错误提示大致可以推断出是公钥配置的问题引起的。</p>
-<p>但是github中我已经配置好了当前的公钥信息了，再次检查公钥。<br>0、github中公钥重新配置了一遍<br>1、git clone可以正确执行。<br>2、ssh -T idealife@github.com<br>也提示：Hi defnngj You’ve successfully authenticated, but GitHub does not provide shell access.<br>说明配置的公钥没有问题。<br>就是在执行sudo hexo deploy的时候报公钥问题。<br><a id="more"></a><br>为什么要加sudo呢？<br>在执行hexo命令时，如果不提权，就会一直提示db.json文件的写权限的错误：<br><code>Unhandled rejection Error: EACCES: permission denied, open &#39;/Users/idealife/Developer/blog/db.json&#39;
-    at Error (native)</code><br>所以进行了权限提升。<br>以前一直是在window环境中配置，对于权限的认识比较浅。突然意识到，就是sudo引起的问题。</p>
-<p>因为我生成公钥的命令是ssh-keygen -t rsa -C “idealife@github.com”<br>没有加sudo，生成的公钥是当前用户的，路径是 /Users/idealife/.ssh。而sudo hexo deploy命令执行的时候应该会去读取的root用户的公钥，很显然root下还没有对应的公钥信息生成。</p>
-<p>随即立即验证这个推测。<br>1、为root生成publickey:sudo ssh-keygen -t rsa -C “idealife@github.com”，对应路径为/var/root/.ssh<br>2、提取公钥信息并配置到github中。问题又来了，在UI界面中是无法访问到/var下的root文件夹的。我们可以通过sudo cat /var/root/.ssh/id_rsa.pub可以绕开这个问题。<br>3、执行sudo hexo deploy，部署成功！</p>
-<p>总结：在Linux或者UNIX环境中一定要注意权限问题！</p>
+        <p>File’s Owner以及Objects在设计界面中的设置虽然大大地方便了程序开发，可以用更少的代码，实现复杂的功能。<br>但是对接触不久的开发者来说，会增加很多的迷惑性，学习成本相对高了。另一方面对于这些的理解和使用很多资料中也只是一笔带过。<br><strong>File’s Owner</strong><br>File’s Owner只是设计时的占位符，只有程序运行时，谁加载了此xib文件，谁才是其Owner。<br>可以在加载的代码initWithWindowNibName:Owenr:中指定其owner，也就成了运行时的File’s Owner。<br>在设计界面中File’s Owner的Custom Class可以随意指定，但指定的Class不符合outlet连接规则时，会有如下图的提示，<br><img src="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/3_2.png" alt="图片"><br>因为在运行中的owner就会完全遵循设计时的Outlets中的连接规则去执行(必须保持一致，否则调用方法时会出现找不到方法）。<br>因此，设计时就要指定好加载该xib的class（或者有相同的接口规范的class，这就大大提高了程序的灵活性）。</p>
+<p><strong>Objects</strong><br>Objects中的添加的NSObject（也可以是NSViewContrller），在xib文件加载的时候都会被实例化。可以这么理解，等效于xib中拖放的控件，可以分2种用途，1、不显示，用于处理与界面之间的交互。2、在代码中控制界面的显示<br>这些Object都可以通过outlet连接到File’s owner中，这样子File’s owner就可以统一管理界面中的元素了。Object之间也可以相互之间连接。<br><img src="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/3_1.png" alt="图片"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://idealife.github.io/2015/10/02/Hexo部署时提示fatal-Could-not-read-from-remote-repository的问题处理/" data-id="cifkl6wbq000wyzoqhb89c3ln" class="article-share-link">Share</a>
+      <a data-url="http://idealife.github.io/2015/10/10/对xib设计界面中File-s-Owner以及Objects的理解/" data-id="cifkl6wbb0008yzoqmyorojkq" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/">Hexo</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/XCode/">XCode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Xib/">Xib</a></li></ul>
 
     </footer>
   </div>
@@ -120,19 +111,10 @@ fatal: Could not read from remote repository.</code><br>分析这个错误提示
     
 <nav id="article-nav">
   
-    <a href="/2015/10/02/Apple-Watch远程通知的实现以及真机实测/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">前一篇</strong>
-      <div class="article-nav-title">
-        
-          Apple Watch远程通知的实现以及真机实测
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/10/01/Wacth-app无法在Watch-OS2-0中安装的问题探索/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2015/10/10/XCode调试的那些事儿（一）/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">后一篇</strong>
-      <div class="article-nav-title">Wacth app无法在watchOS2.0中安装的问题探索</div>
+      <div class="article-nav-title">XCode调试的那些事儿（一）</div>
     </a>
   
 </nav>
@@ -143,7 +125,7 @@ fatal: Could not read from remote repository.</code><br>分析这个错误提示
   
   <section id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="post-Hexo部署时提示fatal-Could-not-read-from-remote-repository的问题处理" data-title="Hexo部署时提示Fatal： Could not read from remote repository的问题处理" data-url="http://idealife.github.io/2015/10/02/Hexo部署时提示fatal-Could-not-read-from-remote-repository的问题处理/"></div>
+    <div class="ds-thread" data-thread-key="post-对xib设计界面中File-s-Owner以及Objects的理解" data-title="对xib设计界面中File&#39;s Owner以及Objects的理解" data-url="http://idealife.github.io/2015/10/10/对xib设计界面中File-s-Owner以及Objects的理解/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">

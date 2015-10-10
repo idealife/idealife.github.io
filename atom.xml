@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Stay hungry. Stay foolish.]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://idealife.github.io/"/>
-  <updated>2015-10-10T03:32:30.000Z</updated>
+  <updated>2015-10-10T04:32:37.000Z</updated>
   <id>http://idealife.github.io/</id>
   
   <author>
@@ -15,15 +15,37 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[对xib设计界面中File's Owner以及Objects的理解]]></title>
+    <link href="http://idealife.github.io/2015/10/10/%E5%AF%B9xib%E8%AE%BE%E8%AE%A1%E7%95%8C%E9%9D%A2%E4%B8%ADFile-s-Owner%E4%BB%A5%E5%8F%8AObjects%E7%9A%84%E7%90%86%E8%A7%A3/"/>
+    <id>http://idealife.github.io/2015/10/10/对xib设计界面中File-s-Owner以及Objects的理解/</id>
+    <published>2015-10-10T03:50:23.000Z</published>
+    <updated>2015-10-10T04:32:37.000Z</updated>
+    <content type="html"><![CDATA[<p>File’s Owner以及Objects在设计界面中的设置虽然大大地方便了程序开发，可以用更少的代码，实现复杂的功能。<br>但是对接触不久的开发者来说，会增加很多的迷惑性，学习成本相对高了。另一方面对于这些的理解和使用很多资料中也只是一笔带过。<br><strong>File’s Owner</strong><br>File’s Owner只是设计时的占位符，只有程序运行时，谁加载了此xib文件，谁才是其Owner。<br>可以在加载的代码initWithWindowNibName:Owenr:中指定其owner，也就成了运行时的File’s Owner。<br>在设计界面中File’s Owner的Custom Class可以随意指定，但指定的Class不符合outlet连接规则时，会有如下图的提示，<br><img src="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/3_2.png" alt="图片"><br>因为在运行中的owner就会完全遵循设计时的Outlets中的连接规则去执行(必须保持一致，否则调用方法时会出现找不到方法）。<br>因此，设计时就要指定好加载该xib的class（或者有相同的接口规范的class，这就大大提高了程序的灵活性）。</p>
+<p><strong>Objects</strong><br>Objects中的添加的NSObject（也可以是NSViewContrller），在xib文件加载的时候都会被实例化。可以这么理解，等效于xib中拖放的控件，可以分2种用途，1、不显示，用于处理与界面之间的交互。2、在代码中控制界面的显示<br>这些Object都可以通过outlet连接到File’s owner中，这样子File’s owner就可以统一管理界面中的元素了。Object之间也可以相互之间连接。<br><img src="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/3_1.png" alt="图片"></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>File’s Owner以及Objects在设计界面中的设置虽然大大地方便了程序开发，可以用更少的代码，实现复杂的功能。<br>但是对接触不久的开发者来说，会增加很多的迷惑性，学习成本相对高了。另一方面对于这些的理解和使用很多资料中也只是一笔带过。<br><strong>F]]>
+    </summary>
+    
+      <category term="XCode" scheme="http://idealife.github.io/tags/XCode/"/>
+    
+      <category term="Xib" scheme="http://idealife.github.io/tags/Xib/"/>
+    
+      <category term="iDev" scheme="http://idealife.github.io/categories/iDev/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[XCode调试的那些事儿（一）]]></title>
     <link href="http://idealife.github.io/2015/10/10/XCode%E8%B0%83%E8%AF%95%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF%EF%BC%88%E4%B8%80%EF%BC%89/"/>
     <id>http://idealife.github.io/2015/10/10/XCode调试的那些事儿（一）/</id>
     <published>2015-10-10T03:09:39.000Z</published>
-    <updated>2015-10-10T03:32:30.000Z</updated>
-    <content type="html"><![CDATA[<p>苹果基本上每年都会有一次大的系统升级，开发工具当然更需要提前一步。不过每次的更新换代，或多或少会带来很多诡异的问题。<br>我的项目原先是在Xcode6.4上的，很顺利的升级到了7.0，编译运行都很正常。<br>可是总是会在固定的代码位置自动停下来，和下了断点的效果是一样一样的。提示：Thread 1: breakpoint 3.1<br>情景重现：<br><img src="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/2-0.png" alt="断点"><br>难道是代码有异常？注释掉这回代码就正常了，但是@try @catch并没有捕获任何异常。<br>真的是奇了怪了。<br>整个项目clean后问题依旧，然后各种捣鼓……<br>搜了一圈有人指出是更新开发环境引起的症状，[%&gt;_&lt;%]，废了半天时间找代码问题，最后竟然是苹果的事情。<br>屏蔽的方法是在调试窗口中，把全局的断点状态标记关闭后，就能顺利执行代码了。<br><img src="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/2-1.png =600" alt="方法"><br>吐槽：苹果，请你好好用心做产品吧，现在黑iCloud的人也越来越多了！</p>
+    <updated>2015-10-10T03:36:57.000Z</updated>
+    <content type="html"><![CDATA[<p>苹果基本上每年都会有一次大的系统升级，开发工具当然更需要提前一步。不过每次的更新换代，或多或少会带来很多诡异的问题。<br>我的项目原先是在Xcode6.4上的，很顺利的升级到了7.0，编译运行都很正常。<br>可是总是会在固定的代码位置自动停下来，和下了断点的效果是一样一样的。提示：Thread 1: breakpoint 3.1<br>情景重现：<br><img src="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/2-0.png" alt="断点"><br>难道是代码有异常？注释掉这回代码就正常了，但是@try @catch并没有捕获任何异常。<br>真的是奇了怪了。<br>整个项目clean后问题依旧，然后各种捣鼓……<br>搜了一圈有人指出是更新开发环境引起的症状，[%&gt;_&lt;%]，废了半天时间找代码问题，最后竟然是苹果的事情。<br><a id="more"></a><br>屏蔽的方法是在调试窗口中，把全局的断点状态标记关闭后，就能顺利执行代码了。<br><img src="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/2-1.png" alt="方法"><br>吐槽：苹果，请你好好用心做产品吧，现在黑iCloud的人也越来越多了！</p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>苹果基本上每年都会有一次大的系统升级，开发工具当然更需要提前一步。不过每次的更新换代，或多或少会带来很多诡异的问题。<br>我的项目原先是在Xcode6.4上的，很顺利的升级到了7.0，编译运行都很正常。<br>可是总是会在固定的代码位置自动停下来，和下了断点的效果是一样一]]>
+    <![CDATA[<p>苹果基本上每年都会有一次大的系统升级，开发工具当然更需要提前一步。不过每次的更新换代，或多或少会带来很多诡异的问题。<br>我的项目原先是在Xcode6.4上的，很顺利的升级到了7.0，编译运行都很正常。<br>可是总是会在固定的代码位置自动停下来，和下了断点的效果是一样一样的。提示：Thread 1: breakpoint 3.1<br>情景重现：<br><img src="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/2-0.png" alt="断点"><br>难道是代码有异常？注释掉这回代码就正常了，但是@try @catch并没有捕获任何异常。<br>真的是奇了怪了。<br>整个项目clean后问题依旧，然后各种捣鼓……<br>搜了一圈有人指出是更新开发环境引起的症状，[%&gt;_&lt;%]，废了半天时间找代码问题，最后竟然是苹果的事情。<br>]]>
+    
     </summary>
     
       <category term="Xcode" scheme="http://idealife.github.io/tags/Xcode/"/>
