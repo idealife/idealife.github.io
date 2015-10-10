@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Stay hungry. Stay foolish.]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://idealife.github.io/"/>
-  <updated>2015-10-10T03:28:06.000Z</updated>
+  <updated>2015-10-10T03:32:30.000Z</updated>
   <id>http://idealife.github.io/</id>
   
   <author>
@@ -19,8 +19,8 @@
     <link href="http://idealife.github.io/2015/10/10/XCode%E8%B0%83%E8%AF%95%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF%EF%BC%88%E4%B8%80%EF%BC%89/"/>
     <id>http://idealife.github.io/2015/10/10/XCode调试的那些事儿（一）/</id>
     <published>2015-10-10T03:09:39.000Z</published>
-    <updated>2015-10-10T03:28:06.000Z</updated>
-    <content type="html"><![CDATA[<p>苹果基本上每年都会有一次大的系统升级，开发工具当然更需要提前一步。不过每次的更新换代，或多或少会带来很多诡异的问题。<br>我的项目原先是在Xcode6.4上的，很顺利的升级到了7.0，编译运行都很正常。<br>可是总是会在固定的代码位置自动停下来，和下了断点的效果是一样一样的。提示：Thread 1: breakpoint 3.1<br>情景重现：<br><img src="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/2-0.png" alt="断点"><br>难道是代码有异常？注释掉这回代码就正常了，但是@try @catch并没有捕获任何异常。<br>真的是奇了怪了。<br>整个项目clean后问题依旧，然后各种捣鼓……<br>搜了一圈有人指出是更新开发环境引起的症状，[%&gt;_&lt;%]，废了半天时间找代码问题，最后竟然是苹果的事情。<br>屏蔽的方法是在调试窗口中，把全局的断点状态标记关闭后，就能顺利执行代码了。<br><img src="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/2-1.png" alt="方法"><br>吐槽：苹果，请你好好用心做产品吧，现在黑iCloud的人也越来越多了！</p>
+    <updated>2015-10-10T03:32:30.000Z</updated>
+    <content type="html"><![CDATA[<p>苹果基本上每年都会有一次大的系统升级，开发工具当然更需要提前一步。不过每次的更新换代，或多或少会带来很多诡异的问题。<br>我的项目原先是在Xcode6.4上的，很顺利的升级到了7.0，编译运行都很正常。<br>可是总是会在固定的代码位置自动停下来，和下了断点的效果是一样一样的。提示：Thread 1: breakpoint 3.1<br>情景重现：<br><img src="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/2-0.png" alt="断点"><br>难道是代码有异常？注释掉这回代码就正常了，但是@try @catch并没有捕获任何异常。<br>真的是奇了怪了。<br>整个项目clean后问题依旧，然后各种捣鼓……<br>搜了一圈有人指出是更新开发环境引起的症状，[%&gt;_&lt;%]，废了半天时间找代码问题，最后竟然是苹果的事情。<br>屏蔽的方法是在调试窗口中，把全局的断点状态标记关闭后，就能顺利执行代码了。<br><img src="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/2-1.png =600" alt="方法"><br>吐槽：苹果，请你好好用心做产品吧，现在黑iCloud的人也越来越多了！</p>
 ]]></content>
     <summary type="html">
     <![CDATA[<p>苹果基本上每年都会有一次大的系统升级，开发工具当然更需要提前一步。不过每次的更新换代，或多或少会带来很多诡异的问题。<br>我的项目原先是在Xcode6.4上的，很顺利的升级到了7.0，编译运行都很正常。<br>可是总是会在固定的代码位置自动停下来，和下了断点的效果是一样一]]>
