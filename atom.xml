@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Stay hungry. Stay foolish.]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://idealife.github.io/"/>
-  <updated>2015-10-10T04:36:38.000Z</updated>
+  <updated>2015-10-21T15:00:00.000Z</updated>
   <id>http://idealife.github.io/</id>
   
   <author>
@@ -13,6 +13,27 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[NSScrollView你可能遇到的坑]]></title>
+    <link href="http://idealife.github.io/2015/10/21/NSScrollView%E4%BD%A0%E5%8F%AF%E8%83%BD%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/"/>
+    <id>http://idealife.github.io/2015/10/21/NSScrollView你可能遇到的坑/</id>
+    <published>2015-10-21T14:42:02.000Z</published>
+    <updated>2015-10-21T15:00:00.000Z</updated>
+    <content type="html"><![CDATA[<p>换了一个用来开发的Mac【就叫Mac A吧】，程序运行一切正常。<br>可是仔细一看，发现程序中某个界面的表格区域竟然默认显示了滚动条，很是奇怪。<br><img src="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/4_2.png" alt="图片区域">因为我明明设置NSScrollView的属性是Automatically Hide Scroller，如图。正常情况下我鼠标放到表格区域才会出现滚动条的。<br><img src="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/4_1.png" alt="图片区域"><br>又特地去原来的Mac【Mac B】上查看效果，滚动条默认是不显示的，两个都是10.9.5的系统，显示效果竟然不一样，有点想不明白。随后又找了个10.10的系统【Mac C】对比效果，也是不会自动显示滚动条的。正当一筹莫展中，猛然发现Mac A的Xcode也是默认显示着滚动条。<br>难道是系统的某个显示效果设置引起的？<br><a id="more"></a><br>费尽周折，果不其然，在“偏好设置”–“通用”中找到了滚动条的显示设置，如下图<br><img src="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/4_3.png" alt="图片区域"></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>换了一个用来开发的Mac【就叫Mac A吧】，程序运行一切正常。<br>可是仔细一看，发现程序中某个界面的表格区域竟然默认显示了滚动条，很是奇怪。<br><img src="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/4_2.png" alt="图片区域">因为我明明设置NSScrollView的属性是Automatically Hide Scroller，如图。正常情况下我鼠标放到表格区域才会出现滚动条的。<br><img src="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/4_1.png" alt="图片区域"><br>又特地去原来的Mac【Mac B】上查看效果，滚动条默认是不显示的，两个都是10.9.5的系统，显示效果竟然不一样，有点想不明白。随后又找了个10.10的系统【Mac C】对比效果，也是不会自动显示滚动条的。正当一筹莫展中，猛然发现Mac A的Xcode也是默认显示着滚动条。<br>难道是系统的某个显示效果设置引起的？<br>]]>
+    
+    </summary>
+    
+      <category term="Mac OS X" scheme="http://idealife.github.io/tags/Mac-OS-X/"/>
+    
+      <category term="Xcode" scheme="http://idealife.github.io/tags/Xcode/"/>
+    
+      <category term="iDev" scheme="http://idealife.github.io/categories/iDev/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[对xib设计界面中File's Owner以及Objects的理解]]></title>
