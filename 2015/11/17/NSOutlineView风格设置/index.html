@@ -3,23 +3,24 @@
 <head>
   <meta charset="utf-8">
   
-  <title>对xib设计界面中File&#39;s Owner以及Objects的理解 | iDealife</title>
+  <title>NSOutlineView风格设置 | iDealife</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="File’s Owner以及Objects在设计界面中的设置虽然大大地方便了程序开发，可以用更少的代码，实现复杂的功能。但是对接触不久的开发者来说，会增加很多的迷惑性，学习成本相对高了。另一方面对于这些的理解和使用很多资料中也只是一笔带过。
-File’s OwnerFile’s Owner只是设计时的占位符，只有程序运行时，谁加载了此xib文件，谁才是其Owner。可以在加载的代码initWith">
+  <meta name="description" content="项目中用到了NSOutlineView,所以就在苹果的官网找了相关的Demo了解其具体的用法，代码下载链接：SidebarDemo。熟悉了代码后，依葫芦画瓢，顺利完成了自己的代码编写，可是运行后的效果，和demo中的效果竟然完全不一样，尝试了各种方式均不能解决。通过比对NSOutlineView的每个属性，终于在一个不起眼的位置发现了一个重要的属性：Highlight。这个关键真的是有很大的误导性">
 <meta property="og:type" content="article">
-<meta property="og:title" content="对xib设计界面中File's Owner以及Objects的理解">
-<meta property="og:url" content="http://idealife.github.io/2015/10/10/对xib设计界面中File-s-Owner以及Objects的理解/index.html">
+<meta property="og:title" content="NSOutlineView风格设置">
+<meta property="og:url" content="http://idealife.github.io/2015/11/17/NSOutlineView风格设置/index.html">
 <meta property="og:site_name" content="iDealife">
-<meta property="og:description" content="File’s Owner以及Objects在设计界面中的设置虽然大大地方便了程序开发，可以用更少的代码，实现复杂的功能。但是对接触不久的开发者来说，会增加很多的迷惑性，学习成本相对高了。另一方面对于这些的理解和使用很多资料中也只是一笔带过。
-File’s OwnerFile’s Owner只是设计时的占位符，只有程序运行时，谁加载了此xib文件，谁才是其Owner。可以在加载的代码initWith">
-<meta property="og:image" content="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/3_2.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/3_1.png">
-<meta property="og:updated_time" content="2015-10-10T04:36:38.000Z">
+<meta property="og:description" content="项目中用到了NSOutlineView,所以就在苹果的官网找了相关的Demo了解其具体的用法，代码下载链接：SidebarDemo。熟悉了代码后，依葫芦画瓢，顺利完成了自己的代码编写，可是运行后的效果，和demo中的效果竟然完全不一样，尝试了各种方式均不能解决。通过比对NSOutlineView的每个属性，终于在一个不起眼的位置发现了一个重要的属性：Highlight。这个关键真的是有很大的误导性">
+<meta property="og:image" content="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/5_1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/5_2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/5_3.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/5_4.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/5_6.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/5_7.png">
+<meta property="og:updated_time" content="2015-11-17T14:41:25.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="对xib设计界面中File's Owner以及Objects的理解">
-<meta name="twitter:description" content="File’s Owner以及Objects在设计界面中的设置虽然大大地方便了程序开发，可以用更少的代码，实现复杂的功能。但是对接触不久的开发者来说，会增加很多的迷惑性，学习成本相对高了。另一方面对于这些的理解和使用很多资料中也只是一笔带过。
-File’s OwnerFile’s Owner只是设计时的占位符，只有程序运行时，谁加载了此xib文件，谁才是其Owner。可以在加载的代码initWith">
+<meta name="twitter:title" content="NSOutlineView风格设置">
+<meta name="twitter:description" content="项目中用到了NSOutlineView,所以就在苹果的官网找了相关的Demo了解其具体的用法，代码下载链接：SidebarDemo。熟悉了代码后，依葫芦画瓢，顺利完成了自己的代码编写，可是运行后的效果，和demo中的效果竟然完全不一样，尝试了各种方式均不能解决。通过比对NSOutlineView的每个属性，终于在一个不起眼的位置发现了一个重要的属性：Highlight。这个关键真的是有很大的误导性">
   
     <link rel="alternative" href="/atom.xml" title="iDealife" type="application/atom+xml">
   
@@ -71,10 +72,10 @@ File’s OwnerFile’s Owner只是设计时的占位符，只有程序运行时�
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-对xib设计界面中File-s-Owner以及Objects的理解" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-NSOutlineView风格设置" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/10/10/对xib设计界面中File-s-Owner以及Objects的理解/" class="article-date">
-  <time datetime="2015-10-10T03:50:23.000Z" itemprop="datePublished">2015-10-10</time>
+    <a href="/2015/11/17/NSOutlineView风格设置/" class="article-date">
+  <time datetime="2015-11-17T14:00:05.000Z" itemprop="datePublished">2015-11-17</time>
 </a>
     
   <div class="article-category">
@@ -89,7 +90,7 @@ File’s OwnerFile’s Owner只是设计时的占位符，只有程序运行时�
         
   
     <h1 class="article-title" itemprop="name">
-      对xib设计界面中File&#39;s Owner以及Objects的理解
+      NSOutlineView风格设置
     </h1>
   
 
@@ -97,14 +98,19 @@ File’s OwnerFile’s Owner只是设计时的占位符，只有程序运行时�
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>File’s Owner以及Objects在设计界面中的设置虽然大大地方便了程序开发，可以用更少的代码，实现复杂的功能。<br>但是对接触不久的开发者来说，会增加很多的迷惑性，学习成本相对高了。另一方面对于这些的理解和使用很多资料中也只是一笔带过。</p>
-<p><strong>File’s Owner</strong><br>File’s Owner只是设计时的占位符，只有程序运行时，谁加载了此xib文件，谁才是其Owner。<br>可以在加载的代码initWithWindowNibName:Owenr:中指定其owner，也就成了运行时的File’s Owner。<br>在设计界面中File’s Owner的Custom Class可以随意指定，但指定的Class不符合outlet连接规则时，会有如下图的提示，<br><a id="more"></a><br><img src="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/3_2.png" alt="图片"><br>因为在运行中的owner就会完全遵循设计时的Outlets中的连接规则去执行(必须保持一致，否则调用方法时会出现找不到方法）。<br>因此，设计时就要指定好加载该xib的class（或者有相同的接口规范的class，这就大大提高了程序的灵活性）。</p>
-<p><strong>Objects</strong><br>Objects中的添加的NSObject（也可以是NSViewContrller），在xib文件加载的时候都会被实例化。可以这么理解，等效于xib中拖放的控件，可以分2种用途，1、不显示，用于处理与界面之间的交互。2、在代码中控制界面的显示。<br>这些Object都可以通过outlet连接到File’s owner中，这样子File’s owner就可以统一管理界面中的元素了。Object之间也可以相互之间连接。<br><img src="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/3_1.png" alt="图片"></p>
+        <p>项目中用到了NSOutlineView,所以就在苹果的官网找了相关的Demo了解其具体的用法，代码下载链接：<br><a href="https://developer.apple.com/library/mac/samplecode/SidebarDemo/Introduction/Intro.html#//apple_ref/doc/uid/DTS40010893-Intro-DontLinkElementID_2" target="_blank" rel="external">SidebarDemo</a>。<br>熟悉了代码后，依葫芦画瓢，顺利完成了自己的代码编写，可是运行后的效果，和demo中的效果竟然完全不一样，尝试了各种方式均不能解决。<br>通过比对NSOutlineView的每个属性，终于在一个不起眼的位置发现了一个重要的属性：<code>Highlight</code>。这个关键真的是有很大的误导性，要是取成Style什么的也不会让我纠结那么久了。<br><a id="more"></a></p>
+<h3 id="期望的效果">期望的效果</h3><p>Demo中<code>Highlight</code>属性设置为Source List, 如图<br><img src="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/5_1.png" alt="图片1"><br>并且代码中需要做如下处理<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">BOOL</span>)outlineView:(<span class="built_in">NSOutlineView</span> *)outlineView isGroupItem:(<span class="keyword">id</span>)item &#123;</span><br><span class="line">    <span class="keyword">return</span> [_topLevelItems containsObject:item]; <span class="comment">//根节点返回的时YES;</span></span><br><span class="line">&#125;</span><br><span class="line">- (<span class="built_in">BOOL</span>)outlineView:(<span class="built_in">NSOutlineView</span> *)outlineView shouldShowOutlineCellForItem:(<span class="keyword">id</span>)item &#123;</span><br><span class="line">    <span class="comment">// As an example, hide the "outline disclosure button" for FAVORITES. This hides the "Show/Hide" button and disables the tracking area for that row.</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>显示效果如下（鼠标放上去显示的Show和Hide会自动根据本地化设置做对应的显示，目前应该还没有自定义的方法，据说是个pravite api）<br><img src="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/5_2.png" alt="图片2"></p>
+<h3 id="改造_验证">改造 验证</h3><p>稍微改变一下代码<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">BOOL</span>)outlineView:(<span class="built_in">NSOutlineView</span> *)outlineView isGroupItem:(<span class="keyword">id</span>)item &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NO</span>;<span class="comment">//[_topLevelItems containsObject:item];</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如下所示，父节点的伸缩不在通过Show\Hide完成了，而是通过前面的倒三角控制了。界面也不怎么好看了。<br><img src="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/5_3.png" alt="图片3"></p>
+<p>再此基础上，继续修改代码<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">BOOL</span>)outlineView:(<span class="built_in">NSOutlineView</span> *)outlineView shouldShowOutlineCellForItem:(<span class="keyword">id</span>)item &#123;</span><br><span class="line">    <span class="comment">// As an example, hide the "outline disclosure button" for FAVORITES. This hides the "Show/Hide" button and disables the tracking area for that row.</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NO</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>现在的效果变成了下面的图，<code>shouldShowOutlineCellForItem</code>这个方法的作用是控制父节点是否能响应伸缩事件。<br><img src="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/5_4.png" alt="图片4"></p>
+<p>下面两图分别是<code>Highlight</code>属性设置为Regular 和 None的效果，视觉效果都很糟糕，但是不同的场景下，可能还是需要这类效果的。设置None后即使是选中列表项也不会高亮的。<br><img src="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/5_6.png" alt="图片6"><br><img src="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/5_7.png" alt="图片7"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://idealife.github.io/2015/10/10/对xib设计界面中File-s-Owner以及Objects的理解/" data-id="cih3hi0dy0008e1oqrj5z4hul" class="article-share-link">Share</a>
+      <a data-url="http://idealife.github.io/2015/11/17/NSOutlineView风格设置/" data-id="cih3hi0ed000ze1oqxffpaqnb" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Xcode/">Xcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Xib/">Xib</a></li></ul>
@@ -115,19 +121,10 @@ File’s OwnerFile’s Owner只是设计时的占位符，只有程序运行时�
     
 <nav id="article-nav">
   
-    <a href="/2015/10/21/NSScrollView你可能遇到的坑/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">前一篇</strong>
-      <div class="article-nav-title">
-        
-          NSScrollView你可能遇到的坑
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/10/10/XCode调试的那些事儿（一）/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2015/10/21/NSScrollView你可能遇到的坑/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">后一篇</strong>
-      <div class="article-nav-title">XCode调试的那些事儿（一）</div>
+      <div class="article-nav-title">NSScrollView你可能遇到的坑</div>
     </a>
   
 </nav>
@@ -138,7 +135,7 @@ File’s OwnerFile’s Owner只是设计时的占位符，只有程序运行时�
   
   <section id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="post-对xib设计界面中File-s-Owner以及Objects的理解" data-title="对xib设计界面中File&#39;s Owner以及Objects的理解" data-url="http://idealife.github.io/2015/10/10/对xib设计界面中File-s-Owner以及Objects的理解/"></div>
+    <div class="ds-thread" data-thread-key="post-NSOutlineView风格设置" data-title="NSOutlineView风格设置" data-url="http://idealife.github.io/2015/11/17/NSOutlineView风格设置/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">

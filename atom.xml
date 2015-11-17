@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Stay hungry. Stay foolish.]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://idealife.github.io/"/>
-  <updated>2015-10-22T13:27:37.000Z</updated>
+  <updated>2015-11-17T14:41:25.000Z</updated>
   <id>http://idealife.github.io/</id>
   
   <author>
@@ -13,6 +13,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[NSOutlineView风格设置]]></title>
+    <link href="http://idealife.github.io/2015/11/17/NSOutlineView%E9%A3%8E%E6%A0%BC%E8%AE%BE%E7%BD%AE/"/>
+    <id>http://idealife.github.io/2015/11/17/NSOutlineView风格设置/</id>
+    <published>2015-11-17T14:00:05.000Z</published>
+    <updated>2015-11-17T14:41:25.000Z</updated>
+    <content type="html"><![CDATA[<p>项目中用到了NSOutlineView,所以就在苹果的官网找了相关的Demo了解其具体的用法，代码下载链接：<br><a href="https://developer.apple.com/library/mac/samplecode/SidebarDemo/Introduction/Intro.html#//apple_ref/doc/uid/DTS40010893-Intro-DontLinkElementID_2" target="_blank" rel="external">SidebarDemo</a>。<br>熟悉了代码后，依葫芦画瓢，顺利完成了自己的代码编写，可是运行后的效果，和demo中的效果竟然完全不一样，尝试了各种方式均不能解决。<br>通过比对NSOutlineView的每个属性，终于在一个不起眼的位置发现了一个重要的属性：<code>Highlight</code>。这个关键真的是有很大的误导性，要是取成Style什么的也不会让我纠结那么久了。<br><a id="more"></a></p>
+<h3 id="期望的效果">期望的效果</h3><p>Demo中<code>Highlight</code>属性设置为Source List, 如图<br><img src="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/5_1.png" alt="图片1"><br>并且代码中需要做如下处理<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">BOOL</span>)outlineView:(<span class="built_in">NSOutlineView</span> *)outlineView isGroupItem:(<span class="keyword">id</span>)item &#123;</span><br><span class="line">    <span class="keyword">return</span> [_topLevelItems containsObject:item]; <span class="comment">//根节点返回的时YES;</span></span><br><span class="line">&#125;</span><br><span class="line">- (<span class="built_in">BOOL</span>)outlineView:(<span class="built_in">NSOutlineView</span> *)outlineView shouldShowOutlineCellForItem:(<span class="keyword">id</span>)item &#123;</span><br><span class="line">    <span class="comment">// As an example, hide the "outline disclosure button" for FAVORITES. This hides the "Show/Hide" button and disables the tracking area for that row.</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>显示效果如下（鼠标放上去显示的Show和Hide会自动根据本地化设置做对应的显示，目前应该还没有自定义的方法，据说是个pravite api）<br><img src="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/5_2.png" alt="图片2"></p>
+<h3 id="改造_验证">改造 验证</h3><p>稍微改变一下代码<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">BOOL</span>)outlineView:(<span class="built_in">NSOutlineView</span> *)outlineView isGroupItem:(<span class="keyword">id</span>)item &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NO</span>;<span class="comment">//[_topLevelItems containsObject:item];</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如下所示，父节点的伸缩不在通过Show\Hide完成了，而是通过前面的倒三角控制了。界面也不怎么好看了。<br><img src="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/5_3.png" alt="图片3"></p>
+<p>再此基础上，继续修改代码<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">BOOL</span>)outlineView:(<span class="built_in">NSOutlineView</span> *)outlineView shouldShowOutlineCellForItem:(<span class="keyword">id</span>)item &#123;</span><br><span class="line">    <span class="comment">// As an example, hide the "outline disclosure button" for FAVORITES. This hides the "Show/Hide" button and disables the tracking area for that row.</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NO</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>现在的效果变成了下面的图，<code>shouldShowOutlineCellForItem</code>这个方法的作用是控制父节点是否能响应伸缩事件。<br><img src="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/5_4.png" alt="图片4"></p>
+<p>下面两图分别是<code>Highlight</code>属性设置为Regular 和 None的效果，视觉效果都很糟糕，但是不同的场景下，可能还是需要这类效果的。设置None后即使是选中列表项也不会高亮的。<br><img src="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/5_6.png" alt="图片6"><br><img src="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/5_7.png" alt="图片7"></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>项目中用到了NSOutlineView,所以就在苹果的官网找了相关的Demo了解其具体的用法，代码下载链接：<br><a href="https://developer.apple.com/library/mac/samplecode/SidebarDemo/Introduction/Intro.html#//apple_ref/doc/uid/DTS40010893-Intro-DontLinkElementID_2">SidebarDemo</a>。<br>熟悉了代码后，依葫芦画瓢，顺利完成了自己的代码编写，可是运行后的效果，和demo中的效果竟然完全不一样，尝试了各种方式均不能解决。<br>通过比对NSOutlineView的每个属性，终于在一个不起眼的位置发现了一个重要的属性：<code>Highlight</code>。这个关键真的是有很大的误导性，要是取成Style什么的也不会让我纠结那么久了。<br>]]>
+    
+    </summary>
+    
+      <category term="Xcode" scheme="http://idealife.github.io/tags/Xcode/"/>
+    
+      <category term="Xib" scheme="http://idealife.github.io/tags/Xib/"/>
+    
+      <category term="iDev" scheme="http://idealife.github.io/categories/iDev/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[NSScrollView你可能遇到的坑]]></title>
@@ -86,7 +114,7 @@
     <link href="http://idealife.github.io/2015/10/10/initWithFrame%E5%92%8CinitWithCoder%E7%9A%84%E6%96%B0%E5%8F%91%E7%8E%B0/"/>
     <id>http://idealife.github.io/2015/10/10/initWithFrame和initWithCoder的新发现/</id>
     <published>2015-10-10T01:38:52.000Z</published>
-    <updated>2015-10-10T02:59:29.000Z</updated>
+    <updated>2015-11-17T14:01:53.000Z</updated>
     <content type="html"><![CDATA[<p><strong>背景</strong><br>一般的认识是这样子的：<br>1、当我们所写的程序里没用用Nib文件(XIB)时,用代码控制视图内容，需要调用initWithFrame去初始化<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">id</span>)initWithFrame:(<span class="built_in">CGRect</span>)frame</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span> =[superinitWithFrame:frame]) &#123;</span><br><span class="line">        <span class="comment">// 初始化代码</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>2、用于视图加载nib文件，从nib中加载对象实例时，使用 initWithCoder初始化这些实例对象<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">id</span>)initWithCoder:(<span class="built_in">NSCoder</span>*)coder</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span> =[superinitWithcoder:coder]) &#123;</span><br><span class="line">        <span class="comment">// 初始化代码</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>作为一个初学者，我对上面的知识点深信不疑。<br>但是一个是github上的项目，彻底打乱了我的“三观”。我按照给的demo的流程创建了我的程序，结果我的项目死活不会去调用initWithFrame(该控件内部有初始化代码)，导致不能出现正常的效果。而是会去执行 initWithCoder。<br>如果是多一事不如少一事的心态的话，我在initWithCoder 中增加初始化代码这个事情就结束了。<br>不过我是不会放过这个学习的机会的。按照我的认知，我这边的执行流程才是正确的，因为用到了nib文件。但是我真的特别好奇他是怎么做到的，到底是用了什么黑科技。各种尝试探索都无解后，QQ的技术群在深夜中也被我刷的火热。<br>刨根问底之路又开始了。<br><a id="more"></a></p>
@@ -100,7 +128,7 @@
     
     </summary>
     
-      <category term="OSX" scheme="http://idealife.github.io/tags/OSX/"/>
+      <category term="Mac OS X" scheme="http://idealife.github.io/tags/Mac-OS-X/"/>
     
       <category term="Xcode" scheme="http://idealife.github.io/tags/Xcode/"/>
     
