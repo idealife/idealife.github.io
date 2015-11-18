@@ -67,6 +67,102 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-NSToolbar的使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/11/18/NSToolbar的使用/" class="article-date">
+  <time datetime="2015-11-18T14:40:36.000Z" itemprop="datePublished">2015-11-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iDev/">iDev</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/18/NSToolbar的使用/">NSToolbar的使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1、<a href="https://developer.apple.com/library/mac/samplecode/ToolbarSample/Introduction/Intro.html#//apple_ref/doc/uid/DTS10000413">NSToolbar的官网demo地址</a><br>2、<a href="https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/Toolbars/Toolbars.pdf">官方PDF资料</a></p>
+<p>特别要注意的是，由于上面的两份资料年代久远，有一些功能在新的OSX SDK已经被弃用了，如Toolbar Separator 和Customize items。<br><img src="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/7_1.png" alt="图片"><br>
+        
+          <p class="article-more-link">
+            <a href="/2015/11/18/NSToolbar的使用/#more">阅读全文</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://idealife.github.io/2015/11/18/NSToolbar的使用/" data-id="cih4xvc9u0010gxoqr24s6zmj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Xcode/">Xcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Xib/">Xib</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+  
+  
+    <article id="post-Xcode程序本地化设置" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/11/18/Xcode程序本地化设置/" class="article-date">
+  <time datetime="2015-11-18T14:14:12.000Z" itemprop="datePublished">2015-11-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iDev/">iDev</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/18/Xcode程序本地化设置/">Xcode程序本地化设置</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>对于Xcode中实现程序的本地化花了点时间做了简单地了解。<br>首先Xcode中实现本地化有两种机制：</p>
+<h4 id="一种是Use_Base_Internationalization">一种是Use Base Internationalization</h4><h4 id="另一种则是不用">另一种则是不用</h4><p>前者是后来苹果改进后的做法，所以现在创建的默认程序都是用的Use Base Internationalization的方法，官网中老的demo则都是第二种方式。两者相结合使用，则会更灵活地实现需要的效果。<br>两则的区别是Use Base Internationalization后，会创建Base.lproj的文件夹，然后把相关的xib文件都放到里面。而翻译的内容则会放到对应语言的lproj文件夹中，如英语，则在en.lproj文件夹中又对应xib的strings文件，只要在这里面做对应的翻译即可。<br>而第二种方式，更直接，但是会更占空间，对应语言的文件夹(如en.lproj)中将会多出一份在Base.lproj文件夹中的xib的copy，所有的翻译都在xib上进行即可。（也可以重新调整界面）<br>
+        
+          <p class="article-more-link">
+            <a href="/2015/11/18/Xcode程序本地化设置/#more">阅读全文</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://idealife.github.io/2015/11/18/Xcode程序本地化设置/" data-id="cih4xvc9k000kgxoqax4655ct" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Xcode/">Xcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/本地化/">本地化</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+  
+  
     <article id="post-NSOutlineView风格设置" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/11/17/NSOutlineView风格设置/" class="article-date">
@@ -102,7 +198,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://idealife.github.io/2015/11/17/NSOutlineView风格设置/" data-id="cih3hi0ed000ze1oqxffpaqnb" class="article-share-link">Share</a>
+      <a data-url="http://idealife.github.io/2015/11/17/NSOutlineView风格设置/" data-id="cih4xvca20018gxoq0ota4c5b" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Xcode/">Xcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Xib/">Xib</a></li></ul>
@@ -149,7 +245,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://idealife.github.io/2015/10/21/NSScrollView你可能遇到的坑/" data-id="cih3hi0eb000ve1oqvjey19yh" class="article-share-link">Share</a>
+      <a data-url="http://idealife.github.io/2015/10/21/NSScrollView你可能遇到的坑/" data-id="cih4xvc9x0014gxoq3f58dslk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mac-OS-X/">Mac OS X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Xcode/">Xcode</a></li></ul>
@@ -197,7 +293,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://idealife.github.io/2015/10/10/对xib设计界面中File-s-Owner以及Objects的理解/" data-id="cih3hi0dy0008e1oqrj5z4hul" class="article-share-link">Share</a>
+      <a data-url="http://idealife.github.io/2015/10/10/对xib设计界面中File-s-Owner以及Objects的理解/" data-id="cih4xvc9b0008gxoqzmoqroni" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Xcode/">Xcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Xib/">Xib</a></li></ul>
@@ -244,7 +340,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://idealife.github.io/2015/10/10/XCode调试的那些事儿（一）/" data-id="cih3hi0e5000ke1oqxpq8bvlv" class="article-share-link">Share</a>
+      <a data-url="http://idealife.github.io/2015/10/10/XCode调试的那些事儿（一）/" data-id="cih4xvc9o000pgxoqodtua8om" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Xcode/">Xcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/调试/">调试</a></li></ul>
@@ -293,7 +389,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://idealife.github.io/2015/10/10/initWithFrame和initWithCoder的新发现/" data-id="cih3hi0e1000ee1oqeqdyvodm" class="article-share-link">Share</a>
+      <a data-url="http://idealife.github.io/2015/10/10/initWithFrame和initWithCoder的新发现/" data-id="cih4xvc9e000egxoqcowznv64" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mac-OS-X/">Mac OS X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Xcode/">Xcode</a></li></ul>
@@ -341,7 +437,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://idealife.github.io/2015/10/02/Apple-Watch远程通知的实现以及真机实测/" data-id="cih3hi0di0000e1oq0qigti0t" class="article-share-link">Share</a>
+      <a data-url="http://idealife.github.io/2015/10/02/Apple-Watch远程通知的实现以及真机实测/" data-id="cih4xvc8u0000gxoqopb08409" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Apple-Watch/">Apple Watch</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/通知/">通知</a></li></ul>
@@ -390,7 +486,7 @@ fatal: Could not read from remote repository.</code><br>分析这个错误提示
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://idealife.github.io/2015/10/02/Hexo部署时提示fatal-Could-not-read-from-remote-repository的问题处理/" data-id="cih3hi0eg0013e1oq257m4gpr" class="article-share-link">Share</a>
+      <a data-url="http://idealife.github.io/2015/10/02/Hexo部署时提示fatal-Could-not-read-from-remote-repository的问题处理/" data-id="cih4xvca4001cgxoqwcigmu6w" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/">Hexo</a></li></ul>
@@ -437,7 +533,7 @@ fatal: Could not read from remote repository.</code><br>分析这个错误提示
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://idealife.github.io/2015/10/01/Wacth-app无法在Watch-OS2-0中安装的问题探索/" data-id="cih3hi0e9000pe1oq2r0urazp" class="article-share-link">Share</a>
+      <a data-url="http://idealife.github.io/2015/10/01/Wacth-app无法在Watch-OS2-0中安装的问题探索/" data-id="cih4xvc9q000ugxoqpkaga3zh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Apple-Watch/">Apple Watch</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Xcode/">Xcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/watchOS2-0/">watchOS2.0</a></li></ul>
@@ -449,48 +545,10 @@ fatal: Could not read from remote repository.</code><br>分析这个错误提示
 
   
   
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/10/01/hello-world/" class="article-date">
-  <time datetime="2015-10-01T12:41:26.000Z" itemprop="datePublished">2015-10-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/01/hello-world/">开卷有益</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>由于没有备份原来的hexo模板，换了电脑后就不得不重新把这个残局收拾起来。<br>这个教训很深刻。<br>关于如何<a href="http://nodlee.com/2015/06/07/how-to-porting-hexo/#more" target="_blank" rel="external">移植</a>,可以参考这篇<a href="http://nodlee.com/2015/06/07/how-to-porting-hexo/#more" target="_blank" rel="external">文章</a></p>
-<hr>
-<h2 id="Hello_Github">Hello Github</h2><p>Github是一个神奇的网站，简直就是一个超级大的宝库，<br>接触越多就越能发现它的价值！</p>
-<p>因此在这个平台上分享也是一件非常有意义的事情！<br>Leg’s go!</p>
-<hr>
-<p>在CSDN断断续续经营了几年的<a href="http://blog.csdn.net/qustdong/" target="_blank" rel="external">博客</a>最终还是会被现有的Github Pages所取代,虽然它的SEO已经做的非常不错了，但是这几年来的排版一直让我很痛苦。最近也增加了Markdown语法的支持，那也无法阻止我来到这片干净的乐土！</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://idealife.github.io/2015/10/01/hello-world/" data-id="cih3hi0e4000je1oqw0h2bg5p" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-  
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 </section>
         
@@ -500,7 +558,7 @@ fatal: Could not read from remote repository.</code><br>分析这个错误提示
   <div class="widget-wrap">
     <h3 class="widget-title">目录</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iDev/">iDev</a><span class="category-list-count">7</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iDev/">iDev</a><span class="category-list-count">9</span></li></ul>
     </div>
   </div>
 
@@ -509,7 +567,7 @@ fatal: Could not read from remote repository.</code><br>分析这个错误提示
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apple-Watch/">Apple Watch</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac-OS-X/">Mac OS X</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/">Xcode</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xib/">Xib</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/watchOS2-0/">watchOS2.0</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/调试/">调试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/通知/">通知</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apple-Watch/">Apple Watch</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac-OS-X/">Mac OS X</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/">Xcode</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xib/">Xib</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/watchOS2-0/">watchOS2.0</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/本地化/">本地化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/调试/">调试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/通知/">通知</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -518,7 +576,7 @@ fatal: Could not read from remote repository.</code><br>分析这个错误提示
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Apple-Watch/" style="font-size: 15px;">Apple Watch</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Mac-OS-X/" style="font-size: 15px;">Mac OS X</a> <a href="/tags/Xcode/" style="font-size: 20px;">Xcode</a> <a href="/tags/Xib/" style="font-size: 15px;">Xib</a> <a href="/tags/watchOS2-0/" style="font-size: 10px;">watchOS2.0</a> <a href="/tags/调试/" style="font-size: 10px;">调试</a> <a href="/tags/通知/" style="font-size: 10px;">通知</a>
+      <a href="/tags/Apple-Watch/" style="font-size: 13.33px;">Apple Watch</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Mac-OS-X/" style="font-size: 13.33px;">Mac OS X</a> <a href="/tags/Xcode/" style="font-size: 20px;">Xcode</a> <a href="/tags/Xib/" style="font-size: 16.67px;">Xib</a> <a href="/tags/watchOS2-0/" style="font-size: 10px;">watchOS2.0</a> <a href="/tags/本地化/" style="font-size: 10px;">本地化</a> <a href="/tags/调试/" style="font-size: 10px;">调试</a> <a href="/tags/通知/" style="font-size: 10px;">通知</a>
     </div>
   </div>
 
@@ -527,7 +585,7 @@ fatal: Could not read from remote repository.</code><br>分析这个错误提示
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">8</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">8</span></li></ul>
     </div>
   </div>
 
@@ -539,6 +597,14 @@ fatal: Could not read from remote repository.</code><br>分析这个错误提示
       <ul>
         
           <li>
+            <a href="/2015/11/18/NSToolbar的使用/">NSToolbar的使用</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/18/Xcode程序本地化设置/">Xcode程序本地化设置</a>
+          </li>
+        
+          <li>
             <a href="/2015/11/17/NSOutlineView风格设置/">NSOutlineView风格设置</a>
           </li>
         
@@ -548,14 +614,6 @@ fatal: Could not read from remote repository.</code><br>分析这个错误提示
         
           <li>
             <a href="/2015/10/10/对xib设计界面中File-s-Owner以及Objects的理解/">对xib设计界面中File&#39;s Owner以及Objects的理解</a>
-          </li>
-        
-          <li>
-            <a href="/2015/10/10/XCode调试的那些事儿（一）/">XCode调试的那些事儿（一）</a>
-          </li>
-        
-          <li>
-            <a href="/2015/10/10/initWithFrame和initWithCoder的新发现/">initWithFrame和initWithCoder的新发现</a>
           </li>
         
       </ul>

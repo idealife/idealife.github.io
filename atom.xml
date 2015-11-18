@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Stay hungry. Stay foolish.]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://idealife.github.io/"/>
-  <updated>2015-11-17T14:41:25.000Z</updated>
+  <updated>2015-11-18T15:03:17.000Z</updated>
   <id>http://idealife.github.io/</id>
   
   <author>
@@ -13,6 +13,56 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[NSToolbar的使用]]></title>
+    <link href="http://idealife.github.io/2015/11/18/NSToolbar%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+    <id>http://idealife.github.io/2015/11/18/NSToolbar的使用/</id>
+    <published>2015-11-18T14:40:36.000Z</published>
+    <updated>2015-11-18T15:03:17.000Z</updated>
+    <content type="html"><![CDATA[<p>1、<a href="https://developer.apple.com/library/mac/samplecode/ToolbarSample/Introduction/Intro.html#//apple_ref/doc/uid/DTS10000413" target="_blank" rel="external">NSToolbar的官网demo地址</a><br>2、<a href="https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/Toolbars/Toolbars.pdf" target="_blank" rel="external">官方PDF资料</a></p>
+<p>特别要注意的是，由于上面的两份资料年代久远，有一些功能在新的OSX SDK已经被弃用了，如Toolbar Separator 和Customize items。<br><img src="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/7_1.png" alt="图片"><br><a id="more"></a><br>下面讲解已打印功能讲一下NSToolbar使用中要注意的地方<br>首先要实现NSToolbarDelegate中的方法，是Item可用<br><figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//--------------------------------------------------------------------------------------------------</span><br><span class="line">// <span class="type">We</span> don't <span class="keyword">do</span> anything useful here (<span class="keyword">and</span> we don't really have to implement this <span class="keyword">method</span>) but you could</span><br><span class="line">// <span class="keyword">if</span> you wanted to. <span class="type">If</span>, however, you want to have validation checks on your standard <span class="type">NSToolbarItems</span></span><br><span class="line">// (<span class="keyword">with</span> images) <span class="keyword">and</span> have inactive ones grayed <span class="keyword">out</span>, then this <span class="keyword">is</span> the <span class="keyword">method</span> <span class="keyword">for</span> you.</span><br><span class="line">// <span class="type">It</span> isn't called <span class="keyword">for</span> custom <span class="type">NSToolbarItems</span> (<span class="keyword">with</span> custom views); you'd have to override -validate:</span><br><span class="line">// (see <span class="type">NSToolbarItem</span>.h <span class="keyword">for</span> a discussion) to get it to <span class="keyword">do</span> so <span class="keyword">if</span> you wanted it to.</span><br><span class="line">// <span class="type">If</span> you don't implement this <span class="keyword">method</span>, the <span class="type">NSToolbarItems</span> are enabled by default.</span><br><span class="line">//--------------------------------------------------------------------------------------------------</span><br><span class="line">-(<span class="type">BOOL</span>)validateToolbarItem:(<span class="type">NSToolbarItem</span> *)toolbarItem</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="type">YES</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>因为NSToolbarPrintItem是系统已经定义好了的，所以需要在toolbarWillAddItem自定义我们需要的实现。对于PrintItem而言如果不设置setTarget或者setAction的话，它是回一直处在不可用的状态的。不设置Target，则validateToolbarItem好像是不会进入的（我目前的程序中是这样的，但是demo中，把下面的代码注释掉，PrintItem也一直是可用的。这部分还需要探索一下）。<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//--------------------------------------------------------------------------------------------------</span></span><br><span class="line"><span class="comment">// This is an optional delegate method, called when a new item is about to be added to the toolbar.</span></span><br><span class="line"><span class="comment">// This is a good spot to set up initial state information for toolbar items, particularly ones</span></span><br><span class="line"><span class="comment">// that you don't directly control yourself (like with NSToolbarPrintItemIdentifier here).</span></span><br><span class="line"><span class="comment">// The notification's object is the toolbar, and the @"item" key in the userInfo is the toolbar item</span></span><br><span class="line"><span class="comment">// being added.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//--------------------------------------------------------------------------------------------------</span></span><br><span class="line">- (<span class="typename">void</span>)<span class="string">toolbarWillAddItem:</span>(NSNotification *)notif</span><br><span class="line">&#123;</span><br><span class="line">    NSToolbarItem *addedItem = [[notif userInfo] <span class="string">objectForKey:</span>@<span class="string">"item"</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Is this the printing toolbar item?  If so, then we want to redirect it's action to ourselves</span></span><br><span class="line">    <span class="comment">// so we can handle the printing properly; hence, we give it a new target.</span></span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    <span class="keyword">if</span> ([[addedItem itemIdentifier] <span class="string">isEqual:</span> NSToolbarPrintItemIdentifier])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//[addedItem setToolTip:@"Print your document"];</span></span><br><span class="line">        [addedItem <span class="string">setTarget:</span>self];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>实现打印方法.也可以通过上面setAction重新定义打印的具体实现代码。<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//--------------------------------------------------------------------------------------------------</span></span><br><span class="line"><span class="comment">// The NSToolbarPrintItem NSToolbarItem will sent the -printDocument: message to its target.</span></span><br><span class="line"><span class="comment">// Since we wired its target to be ourselves in -toolbarWillAddItem:, we get called here when</span></span><br><span class="line"><span class="comment">// the user tries to print by clicking the toolbar item.</span></span><br><span class="line"><span class="comment">//--------------------------------------------------------------------------------------------------</span></span><br><span class="line">- (<span class="keyword">void</span>)printDocument:(<span class="keyword">id</span>)sender</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSPrintOperation</span> *printOperation = [<span class="built_in">NSPrintOperation</span> printOperationWithView: [<span class="keyword">self</span><span class="variable">.mainContentView</span> window]<span class="variable">.contentView</span>];</span><br><span class="line">    [printOperation runOperationModalForWindow: [<span class="keyword">self</span><span class="variable">.mainContentView</span> window] delegate:<span class="literal">nil</span> didRunSelector:<span class="literal">nil</span> contextInfo:<span class="literal">nil</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>最终效果<br><img src="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/7_2.png" alt="图片"></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>1、<a href="https://developer.apple.com/library/mac/samplecode/ToolbarSample/Introduction/Intro.html#//apple_ref/doc/uid/DTS10000413">NSToolbar的官网demo地址</a><br>2、<a href="https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/Toolbars/Toolbars.pdf">官方PDF资料</a></p>
+<p>特别要注意的是，由于上面的两份资料年代久远，有一些功能在新的OSX SDK已经被弃用了，如Toolbar Separator 和Customize items。<br><img src="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/7_1.png" alt="图片"><br>]]>
+    
+    </summary>
+    
+      <category term="Xcode" scheme="http://idealife.github.io/tags/Xcode/"/>
+    
+      <category term="Xib" scheme="http://idealife.github.io/tags/Xib/"/>
+    
+      <category term="iDev" scheme="http://idealife.github.io/categories/iDev/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Xcode程序本地化设置]]></title>
+    <link href="http://idealife.github.io/2015/11/18/Xcode%E7%A8%8B%E5%BA%8F%E6%9C%AC%E5%9C%B0%E5%8C%96%E8%AE%BE%E7%BD%AE/"/>
+    <id>http://idealife.github.io/2015/11/18/Xcode程序本地化设置/</id>
+    <published>2015-11-18T14:14:12.000Z</published>
+    <updated>2015-11-18T14:37:44.000Z</updated>
+    <content type="html"><![CDATA[<p>对于Xcode中实现程序的本地化花了点时间做了简单地了解。<br>首先Xcode中实现本地化有两种机制：</p>
+<h4 id="一种是Use_Base_Internationalization">一种是Use Base Internationalization</h4><h4 id="另一种则是不用">另一种则是不用</h4><p>前者是后来苹果改进后的做法，所以现在创建的默认程序都是用的Use Base Internationalization的方法，官网中老的demo则都是第二种方式。两者相结合使用，则会更灵活地实现需要的效果。<br>两则的区别是Use Base Internationalization后，会创建Base.lproj的文件夹，然后把相关的xib文件都放到里面。而翻译的内容则会放到对应语言的lproj文件夹中，如英语，则在en.lproj文件夹中又对应xib的strings文件，只要在这里面做对应的翻译即可。<br>而第二种方式，更直接，但是会更占空间，对应语言的文件夹(如en.lproj)中将会多出一份在Base.lproj文件夹中的xib的copy，所有的翻译都在xib上进行即可。（也可以重新调整界面）<br><a id="more"></a></p>
+<h3 id="设置方式">设置方式</h3><p>在工程的info中，Localizations节点下的Use Base Internationalization即可选择本地化的方式。要实现更多语言的本地化，则在Language中添加即可。如下图。添加后，在xib的File inspector中的Localization中就多出刚增加的语言。也能定制当前xib的本地方方式。如图二，Localizable Stirngs可以单独设置为Interface Builder Cocoa XIB,就被配置成了第二种本地化方式。<br><img src="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/6_3.png" alt="图一"><br>图二：<br><img src="https://raw.githubusercontent.com/idealife/idealife.github.io/master/img/6_1.png" alt="图二"></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>对于Xcode中实现程序的本地化花了点时间做了简单地了解。<br>首先Xcode中实现本地化有两种机制：</p>
+<h4 id="一种是Use_Base_Internationalization">一种是Use Base Internationalization</h4><h4 id="另一种则是不用">另一种则是不用</h4><p>前者是后来苹果改进后的做法，所以现在创建的默认程序都是用的Use Base Internationalization的方法，官网中老的demo则都是第二种方式。两者相结合使用，则会更灵活地实现需要的效果。<br>两则的区别是Use Base Internationalization后，会创建Base.lproj的文件夹，然后把相关的xib文件都放到里面。而翻译的内容则会放到对应语言的lproj文件夹中，如英语，则在en.lproj文件夹中又对应xib的strings文件，只要在这里面做对应的翻译即可。<br>而第二种方式，更直接，但是会更占空间，对应语言的文件夹(如en.lproj)中将会多出一份在Base.lproj文件夹中的xib的copy，所有的翻译都在xib上进行即可。（也可以重新调整界面）<br>]]>
+    
+    </summary>
+    
+      <category term="Xcode" scheme="http://idealife.github.io/tags/Xcode/"/>
+    
+      <category term="本地化" scheme="http://idealife.github.io/tags/%E6%9C%AC%E5%9C%B0%E5%8C%96/"/>
+    
+      <category term="iDev" scheme="http://idealife.github.io/categories/iDev/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[NSOutlineView风格设置]]></title>
