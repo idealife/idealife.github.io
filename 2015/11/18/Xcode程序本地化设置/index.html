@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Xcode程序本地化设置 | iDealife</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="对于Xcode中实现程序的本地化花了点时间做了简单地了解。首先Xcode中实现本地化有两种机制： 一种是Use Base Internationalization另一种则是不用前者是后来苹果改进后的做法，所以现在创建的默认程序都是用的Use Base Internationalization的方法，官网中老的demo则都是第二种方式。两者相结合使用，则会更灵活地实现需要的效果。两则的区别是Use">
+<meta name="keywords" content="Xcode">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Xcode程序本地化设置">
+<meta property="og:url" content="http://idealife.github.io/2015/11/18/Xcode程序本地化设置/index.html">
+<meta property="og:site_name" content="iDealife">
+<meta property="og:description" content="对于Xcode中实现程序的本地化花了点时间做了简单地了解。首先Xcode中实现本地化有两种机制： 一种是Use Base Internationalization另一种则是不用前者是后来苹果改进后的做法，所以现在创建的默认程序都是用的Use Base Internationalization的方法，官网中老的demo则都是第二种方式。两者相结合使用，则会更灵活地实现需要的效果。两则的区别是Use">
+<meta property="og:image" content="http://idealife.github.io/img/201511/4_1.png">
+<meta property="og:image" content="http://idealife.github.io/img/201511/4_2.png">
+<meta property="og:updated_time" content="2017-06-29T14:30:53.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Xcode程序本地化设置">
+<meta name="twitter:description" content="对于Xcode中实现程序的本地化花了点时间做了简单地了解。首先Xcode中实现本地化有两种机制： 一种是Use Base Internationalization另一种则是不用前者是后来苹果改进后的做法，所以现在创建的默认程序都是用的Use Base Internationalization的方法，官网中老的demo则都是第二种方式。两者相结合使用，则会更灵活地实现需要的效果。两则的区别是Use">
+<meta name="twitter:image" content="http://idealife.github.io/img/201511/4_1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="iDealife" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-101836695-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">iDealife</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Stay hungry, Stay foolish.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://idealife.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Xcode程序本地化设置" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/11/18/Xcode程序本地化设置/" class="article-date">
+  <time datetime="2015-11-18T06:37:44.000Z" itemprop="datePublished">2015-11-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iDev/">iDev</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Xcode程序本地化设置
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>对于Xcode中实现程序的本地化花了点时间做了简单地了解。<br>首先Xcode中实现本地化有两种机制：</p>
+<h4 id="一种是Use-Base-Internationalization"><a href="#一种是Use-Base-Internationalization" class="headerlink" title="一种是Use Base Internationalization"></a>一种是Use Base Internationalization</h4><h4 id="另一种则是不用"><a href="#另一种则是不用" class="headerlink" title="另一种则是不用"></a>另一种则是不用</h4><p>前者是后来苹果改进后的做法，所以现在创建的默认程序都是用的Use Base Internationalization的方法，官网中老的demo则都是第二种方式。两者相结合使用，则会更灵活地实现需要的效果。<br>两则的区别是Use Base Internationalization后，会创建Base.lproj的文件夹，然后把相关的xib文件都放到里面。而翻译的内容则会放到对应语言的lproj文件夹中，如英语，则在en.lproj文件夹中又对应xib的strings文件，只要在这里面做对应的翻译即可。<br>而第二种方式，更直接，但是会更占空间，对应语言的文件夹(如en.lproj)中将会多出一份在Base.lproj文件夹中的xib的copy，所有的翻译都在xib上进行即可。（也可以重新调整界面）<br><a id="more"></a></p>
+<h3 id="设置方式"><a href="#设置方式" class="headerlink" title="设置方式"></a>设置方式</h3><p>在工程的info中，Localizations节点下的Use Base Internationalization即可选择本地化的方式。要实现更多语言的本地化，则在Language中添加即可。如下图。添加后，在xib的File inspector中的Localization中就多出刚增加的语言。也能定制当前xib的本地方方式。如图二，Localizable Stirngs可以单独设置为Interface Builder Cocoa XIB,就被配置成了第二种本地化方式。<br><img src="/img/201511/4_1.png" alt="图一"><br>图二：<br><img src="/img/201511/4_2.png" alt="图二"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://idealife.github.io/2015/11/18/Xcode程序本地化设置/" data-id="cj4iiz0n4001kys6rc37pmx3s" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Xcode/">Xcode</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/11/18/NSToolbar的使用/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          NSToolbar的使用
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/11/17/NSOutlineView风格设置/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">NSOutlineView风格设置</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iDev/">iDev</a><span class="category-list-count">9</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apple-Watch/">Apple Watch</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac-OS-X/">Mac OS X</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/">Xcode</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xib/">Xib</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/watchOS2-0/">watchOS2.0</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/调试/">调试</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Apple-Watch/" style="font-size: 13.33px;">Apple Watch</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Mac-OS-X/" style="font-size: 13.33px;">Mac OS X</a> <a href="/tags/Xcode/" style="font-size: 20px;">Xcode</a> <a href="/tags/Xib/" style="font-size: 16.67px;">Xib</a> <a href="/tags/watchOS2-0/" style="font-size: 10px;">watchOS2.0</a> <a href="/tags/调试/" style="font-size: 10px;">调试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2015/11/18/NSToolbar的使用/">NSToolbar的使用</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/18/Xcode程序本地化设置/">Xcode程序本地化设置</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/17/NSOutlineView风格设置/">NSOutlineView风格设置</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/17/initWithFrame和initWithCoder的新发现/">initWithFrame和initWithCoder的新发现</a>
+          </li>
+        
+          <li>
+            <a href="/2015/10/22/NSScrollView你可能遇到的坑/">NSScrollView你可能遇到的坑</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+    <div class="widget-wrap">
+        <h3 class="widget-title">友情链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li class='link'>
+                        <a href='http://blog.csdn.net/qustdong'>
+                            QustDong&#39;s Blog
+                        </a>
+                    </li>
+                    
+            </ul>
+        </div>
+    </div>
+    
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Dong<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

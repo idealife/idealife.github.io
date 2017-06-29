@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>NSToolbar的使用 | iDealife</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1、NSToolbar的官网demo地址2、官方PDF资料">
+<meta name="keywords" content="Xcode,Xib">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NSToolbar的使用">
+<meta property="og:url" content="http://idealife.github.io/2015/11/18/NSToolbar的使用/index.html">
+<meta property="og:site_name" content="iDealife">
+<meta property="og:description" content="1、NSToolbar的官网demo地址2、官方PDF资料">
+<meta property="og:image" content="http://idealife.github.io/img/201511/3_1.png">
+<meta property="og:image" content="http://idealife.github.io/img/201511/3_2.png">
+<meta property="og:updated_time" content="2017-06-29T14:27:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NSToolbar的使用">
+<meta name="twitter:description" content="1、NSToolbar的官网demo地址2、官方PDF资料">
+<meta name="twitter:image" content="http://idealife.github.io/img/201511/3_1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="iDealife" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-101836695-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">iDealife</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Stay hungry, Stay foolish.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://idealife.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-NSToolbar的使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/11/18/NSToolbar的使用/" class="article-date">
+  <time datetime="2015-11-18T07:03:17.000Z" itemprop="datePublished">2015-11-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iDev/">iDev</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      NSToolbar的使用
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1、<a href="https://developer.apple.com/library/mac/samplecode/ToolbarSample/Introduction/Intro.html#//apple_ref/doc/uid/DTS10000413" target="_blank" rel="external">NSToolbar的官网demo地址</a><br>2、<a href="https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/Toolbars/Toolbars.pdf" target="_blank" rel="external">官方PDF资料</a></p>
+<a id="more"></a>
+<p>特别要注意的是，由于上面的两份资料年代久远，有一些功能在新的OSX SDK已经被弃用了，如Toolbar Separator 和Customize items。<br><img src="/img/201511/3_1.png" alt="图片"></p>
+<p>下面讲解已打印功能讲一下NSToolbar使用中要注意的地方<br>首先要实现NSToolbarDelegate中的方法，是Item可用<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//--------------------------------------------------------------------------------------------------</span></div><div class="line"><span class="comment">// We don't do anything useful here (and we don't really have to implement this method) but you could</span></div><div class="line"><span class="comment">// if you wanted to. If, however, you want to have validation checks on your standard NSToolbarItems</span></div><div class="line"><span class="comment">// (with images) and have inactive ones grayed out, then this is the method for you.</span></div><div class="line"><span class="comment">// It isn't called for custom NSToolbarItems (with custom views); you'd have to override -validate:</span></div><div class="line"><span class="comment">// (see NSToolbarItem.h for a discussion) to get it to do so if you wanted it to.</span></div><div class="line"><span class="comment">// If you don't implement this method, the NSToolbarItems are enabled by default.</span></div><div class="line"><span class="comment">//--------------------------------------------------------------------------------------------------</span></div><div class="line">-(<span class="built_in">BOOL</span>)validateToolbarItem:(<span class="built_in">NSToolbarItem</span> *)toolbarItem</div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>因为NSToolbarPrintItem是系统已经定义好了的，所以需要在toolbarWillAddItem自定义我们需要的实现。对于PrintItem而言如果不设置setTarget或者setAction的话，它是回一直处在不可用的状态的。不设置Target，则validateToolbarItem好像是不会进入的（我目前的程序中是这样的，但是demo中，把下面的代码注释掉，PrintItem也一直是可用的。这部分还需要探索一下）。<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//--------------------------------------------------------------------------------------------------</span></div><div class="line"><span class="comment">// This is an optional delegate method, called when a new item is about to be added to the toolbar.</span></div><div class="line"><span class="comment">// This is a good spot to set up initial state information for toolbar items, particularly ones</span></div><div class="line"><span class="comment">// that you don't directly control yourself (like with NSToolbarPrintItemIdentifier here).</span></div><div class="line"><span class="comment">// The notification's object is the toolbar, and the @"item" key in the userInfo is the toolbar item</span></div><div class="line"><span class="comment">// being added.</span></div><div class="line"></div><div class="line"><span class="comment">//--------------------------------------------------------------------------------------------------</span></div><div class="line">- (<span class="keyword">void</span>)<span class="string">toolbarWillAddItem:</span>(NSNotification *)notif</div><div class="line">&#123;</div><div class="line">    NSToolbarItem *addedItem = [[notif userInfo] <span class="string">objectForKey:</span>@<span class="string">"item"</span>];</div><div class="line">    </div><div class="line">    <span class="comment">// Is this the printing toolbar item?  If so, then we want to redirect it's action to ourselves</span></div><div class="line">    <span class="comment">// so we can handle the printing properly; hence, we give it a new target.</span></div><div class="line">    <span class="comment">//</span></div><div class="line">    <span class="keyword">if</span> ([[addedItem itemIdentifier] <span class="string">isEqual:</span> NSToolbarPrintItemIdentifier])</div><div class="line">    &#123;</div><div class="line">        <span class="comment">//[addedItem setToolTip:@"Print your document"];</span></div><div class="line">        [addedItem <span class="string">setTarget:</span>self];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>实现打印方法.也可以通过上面setAction重新定义打印的具体实现代码。<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//--------------------------------------------------------------------------------------------------</span></div><div class="line"><span class="comment">// The NSToolbarPrintItem NSToolbarItem will sent the -printDocument: message to its target.</span></div><div class="line"><span class="comment">// Since we wired its target to be ourselves in -toolbarWillAddItem:, we get called here when</span></div><div class="line"><span class="comment">// the user tries to print by clicking the toolbar item.</span></div><div class="line"><span class="comment">//--------------------------------------------------------------------------------------------------</span></div><div class="line">- (<span class="keyword">void</span>)printDocument:(<span class="keyword">id</span>)sender</div><div class="line">&#123;</div><div class="line">    <span class="built_in">NSPrintOperation</span> *printOperation = [<span class="built_in">NSPrintOperation</span> printOperationWithView: [<span class="keyword">self</span>.mainContentView window].contentView];</div><div class="line">    [printOperation runOperationModalForWindow: [<span class="keyword">self</span>.mainContentView window] delegate:<span class="literal">nil</span> didRunSelector:<span class="literal">nil</span> contextInfo:<span class="literal">nil</span>];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>最终效果<br><img src="/img/201511/3_2.png" alt="图片"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://idealife.github.io/2015/11/18/NSToolbar的使用/" data-id="cj4iiq5n7001gys6rmp2n9mzl" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Xcode/">Xcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Xib/">Xib</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/11/18/Xcode程序本地化设置/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Xcode程序本地化设置</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iDev/">iDev</a><span class="category-list-count">9</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apple-Watch/">Apple Watch</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac-OS-X/">Mac OS X</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/">Xcode</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xib/">Xib</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/watchOS2-0/">watchOS2.0</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/调试/">调试</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Apple-Watch/" style="font-size: 13.33px;">Apple Watch</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Mac-OS-X/" style="font-size: 13.33px;">Mac OS X</a> <a href="/tags/Xcode/" style="font-size: 20px;">Xcode</a> <a href="/tags/Xib/" style="font-size: 16.67px;">Xib</a> <a href="/tags/watchOS2-0/" style="font-size: 10px;">watchOS2.0</a> <a href="/tags/调试/" style="font-size: 10px;">调试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2015/11/18/NSToolbar的使用/">NSToolbar的使用</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/18/Xcode程序本地化设置/">Xcode程序本地化设置</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/17/NSOutlineView风格设置/">NSOutlineView风格设置</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/17/initWithFrame和initWithCoder的新发现/">initWithFrame和initWithCoder的新发现</a>
+          </li>
+        
+          <li>
+            <a href="/2015/10/22/NSScrollView你可能遇到的坑/">NSScrollView你可能遇到的坑</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+    <div class="widget-wrap">
+        <h3 class="widget-title">友情链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li class='link'>
+                        <a href='http://blog.csdn.net/qustdong'>
+                            QustDong&#39;s Blog
+                        </a>
+                    </li>
+                    
+            </ul>
+        </div>
+    </div>
+    
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Dong<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
