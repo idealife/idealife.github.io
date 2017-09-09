@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>关于Qml中的model绑定问题 | iDealife</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Qml中ListView,GridView等视图组件可以通过model属性绑定数据源，通过delegate进行渲染。model属性可以有多种选择，可以是ListModel类型，也可以是数字，或者JavaScript中的数组。Repeater组件中的model更是可以接收任意类型。 A ListView displays data from models created from built-in">
+<meta name="keywords" content="Qml">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于Qml中的model绑定问题">
+<meta property="og:url" content="http://idealife.github.io/2016/08/26/关于Qml中的model绑定问题/index.html">
+<meta property="og:site_name" content="iDealife">
+<meta property="og:description" content="Qml中ListView,GridView等视图组件可以通过model属性绑定数据源，通过delegate进行渲染。model属性可以有多种选择，可以是ListModel类型，也可以是数字，或者JavaScript中的数组。Repeater组件中的model更是可以接收任意类型。 A ListView displays data from models created from built-in">
+<meta property="og:updated_time" content="2017-09-09T09:13:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于Qml中的model绑定问题">
+<meta name="twitter:description" content="Qml中ListView,GridView等视图组件可以通过model属性绑定数据源，通过delegate进行渲染。model属性可以有多种选择，可以是ListModel类型，也可以是数字，或者JavaScript中的数组。Repeater组件中的model更是可以接收任意类型。 A ListView displays data from models created from built-in">
+  
+    <link rel="alternate" href="/atom.xml" title="iDealife" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-101836695-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">iDealife</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Stay hungry, Stay foolish.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://idealife.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-关于Qml中的model绑定问题" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/26/关于Qml中的model绑定问题/" class="article-date">
+  <time datetime="2016-08-26T10:12:34.000Z" itemprop="datePublished">2016-08-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Qml/">Qml</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      关于Qml中的model绑定问题
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Qml中ListView,GridView等视图组件可以通过model属性绑定数据源，通过delegate进行渲染。model属性可以有多种选择，可以是ListModel类型，也可以是数字，或者JavaScript中的数组。Repeater组件中的model更是可以接收任意类型。</p>
+<p><code>A ListView displays data from models created from built-in QML types like ListModel and XmlListModel, or custom model classes defined in C++ that inherit from QAbstractItemModel or QAbstractListModel.
+A ListView has a model, which defines the data to be displayed, and a delegate, which defines how the data should be displayed. Items in a ListView are laid out horizontally or vertically. List views are inherently flickable because ListView inherits from Flickable.</code><br><a id="more"></a><br>如果是通过C++自定义model类型的话，需要继承QAbstractItemModel，这样子的话model的变化就会通知View进行重新渲染。否则底层数据变化，需要手动刷新界面。</p>
+<p><code>A model can be defined by subclassing QAbstractItemModel. This is the best approach if you have a more complex model that cannot be supported by the other approaches. A QAbstractItemModel can also automatically notify a QML view when the model data changes.</code></p>
+<p>下面看一个使用JavaScript中的数组对象例子，通过注释1，注释2的方式修改数组的内容，并不会触发数据对象本身的变化，也就不会进行视图的更新，需要手工重新给model指向数组对象或者让数组对象变化，才能触发更新。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">import</span> <span class="selector-tag">QtQuick</span> 2<span class="selector-class">.7</span></div><div class="line"><span class="selector-tag">import</span> <span class="selector-tag">QtQuick</span><span class="selector-class">.Window</span> 2<span class="selector-class">.2</span></div><div class="line"><span class="selector-tag">import</span> <span class="selector-tag">QtQuick</span><span class="selector-class">.Controls</span> 1<span class="selector-class">.4</span></div><div class="line"></div><div class="line"><span class="selector-tag">Window</span> &#123;</div><div class="line">    <span class="attribute">visible</span>: true</div><div class="line">    width: <span class="number">640</span></div><div class="line">    height: <span class="number">480</span></div><div class="line">    title: <span class="built_in">qsTr</span>(<span class="string">"Hello World"</span>)</div><div class="line"></div><div class="line">    property var list: [<span class="string">'Hello'</span>,<span class="string">'Qml'</span>,<span class="string">'!'</span>]</div><div class="line"></div><div class="line">    Row&#123;</div><div class="line">        id: row</div><div class="line">        Repeater&#123;</div><div class="line">            id: repeater</div><div class="line">            model: list</div><div class="line">            Rectangle &#123;</div><div class="line">                width: <span class="number">100</span>; <span class="attribute">height</span>: <span class="number">40</span></div><div class="line">                border.width: <span class="number">1</span></div><div class="line">                color: <span class="string">"yellow"</span></div><div class="line">                Text&#123;</div><div class="line">                    id: label</div><div class="line">                    verticalAlignment: Qt.AlignVCenter</div><div class="line">                    horizontalAlignment: Qt.AlignHCenter</div><div class="line">                    width: <span class="number">40</span></div><div class="line">                    height: <span class="number">40</span></div><div class="line">                    text: modelData</div><div class="line">                    color: <span class="string">'red'</span></div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="selector-tag">Button</span>&#123;</div><div class="line">        <span class="attribute">x</span>:<span class="number">0</span></div><div class="line">        y:<span class="number">60</span></div><div class="line">        width: <span class="number">100</span></div><div class="line">        height: <span class="number">30</span></div><div class="line">        text: <span class="string">"Update Data"</span></div><div class="line">        onClicked: &#123;</div><div class="line">            <span class="comment">/* 1 不会触发list对象的change</span></div><div class="line">            list.push("I")</div><div class="line">            list.push("Love")</div><div class="line">            list.push("Qml!")</div><div class="line">            */</div><div class="line"></div><div class="line">            <span class="comment">/* 2 不会触发list对象的change</span></div><div class="line">            list[1] = "Qt"</div><div class="line">            */</div><div class="line"></div><div class="line">            // <span class="number">3</span> 对象变化</div><div class="line">            list = [<span class="string">'Hello'</span>,<span class="string">'World'</span>]</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="selector-tag">Button</span>&#123;</div><div class="line">        <span class="attribute">x</span>:<span class="number">120</span></div><div class="line">        y:<span class="number">60</span></div><div class="line">        width: <span class="number">100</span></div><div class="line">        height: <span class="number">30</span></div><div class="line">        text: <span class="string">"Refresh View"</span></div><div class="line">        onClicked: &#123;</div><div class="line">            //针对<span class="number">1</span> <span class="number">2</span>的情况，需要重新绑定model 才会更新视图</div><div class="line">            repeater.model = list;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://idealife.github.io/2016/08/26/关于Qml中的model绑定问题/" data-id="cj7d3jyu0001k1f6ryrjcgu34" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Qml/">Qml</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/01/20/Qt5-7-Qml的项目部署问题/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Qt5.7 Qml的项目部署问题
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/07/08/Qml中组件封装/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Qml中的组件封装</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Qml/">Qml</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iDev/">iDev</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/系统/">系统</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apple-Watch/">Apple Watch</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Grunt/">Grunt</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac-OS-X/">Mac OS X</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NodeJs/">NodeJs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qml/">Qml</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt/">Qt</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VS-Code/">VS Code</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/">Xcode</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xib/">Xib</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jwplayer/">jwplayer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/watchOS2-0/">watchOS2.0</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/调试/">调试</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Apple-Watch/" style="font-size: 12.5px;">Apple Watch</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Grunt/" style="font-size: 10px;">Grunt</a> <a href="/tags/Hexo/" style="font-size: 12.5px;">Hexo</a> <a href="/tags/JavaScript/" style="font-size: 12.5px;">JavaScript</a> <a href="/tags/Mac-OS-X/" style="font-size: 12.5px;">Mac OS X</a> <a href="/tags/NodeJs/" style="font-size: 10px;">NodeJs</a> <a href="/tags/Qml/" style="font-size: 17.5px;">Qml</a> <a href="/tags/Qt/" style="font-size: 10px;">Qt</a> <a href="/tags/VS-Code/" style="font-size: 10px;">VS Code</a> <a href="/tags/Xcode/" style="font-size: 20px;">Xcode</a> <a href="/tags/Xib/" style="font-size: 15px;">Xib</a> <a href="/tags/jwplayer/" style="font-size: 10px;">jwplayer</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/watchOS2-0/" style="font-size: 10px;">watchOS2.0</a> <a href="/tags/调试/" style="font-size: 12.5px;">调试</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/08/24/NPM包管理中的陷阱/">NPM包管理中的陷阱</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/29/VS-Code中的插件以及相关配置/">VS Code中的插件以及相关配置</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/03/Hexo站点的一些配制总结/">Hexo站点的一些配制总结</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/20/XP系统中，客户端软件导致系统不能正常访问网络的问题记录/">XP系统中，客户端软件导致系统不能正常访问网络的问题记录</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/16/时间组件和日期组件/">时间组件和日期组件</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+    <div class="widget-wrap">
+        <h3 class="widget-title">友情链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li class='link'>
+                        <a href='http://blog.csdn.net/qustdong'>
+                            QustDong&#39;s Blog
+                        </a>
+                    </li>
+                    
+            </ul>
+        </div>
+    </div>
+    
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Dong<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

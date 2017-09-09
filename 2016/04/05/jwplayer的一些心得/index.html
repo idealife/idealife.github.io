@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>jwplayer的一些心得 | iDealife</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="过年的时候阿里微信的红包大战打的火热，产品也准备蹭个热点，搞了一个活动页，仿阿里的咻一咻。 声音播放用的是jwplayer,有点杀鸡用牛刀的感觉，没办法，特殊原因必须需要支持Chrome/25.0.1364.172，&amp;lt;audio&amp;gt;如此方便的标签只能看不能用，让我先哭会去。">
+<meta name="keywords" content="jwplayer">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jwplayer的一些心得">
+<meta property="og:url" content="http://idealife.github.io/2016/04/05/jwplayer的一些心得/index.html">
+<meta property="og:site_name" content="iDealife">
+<meta property="og:description" content="过年的时候阿里微信的红包大战打的火热，产品也准备蹭个热点，搞了一个活动页，仿阿里的咻一咻。 声音播放用的是jwplayer,有点杀鸡用牛刀的感觉，没办法，特殊原因必须需要支持Chrome/25.0.1364.172，&amp;lt;audio&amp;gt;如此方便的标签只能看不能用，让我先哭会去。">
+<meta property="og:updated_time" content="2017-09-09T09:13:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="jwplayer的一些心得">
+<meta name="twitter:description" content="过年的时候阿里微信的红包大战打的火热，产品也准备蹭个热点，搞了一个活动页，仿阿里的咻一咻。 声音播放用的是jwplayer,有点杀鸡用牛刀的感觉，没办法，特殊原因必须需要支持Chrome/25.0.1364.172，&amp;lt;audio&amp;gt;如此方便的标签只能看不能用，让我先哭会去。">
+  
+    <link rel="alternate" href="/atom.xml" title="iDealife" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-101836695-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">iDealife</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Stay hungry, Stay foolish.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://idealife.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-jwplayer的一些心得" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/04/05/jwplayer的一些心得/" class="article-date">
+  <time datetime="2016-04-05T12:05:35.000Z" itemprop="datePublished">2016-04-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/前端/">前端</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      jwplayer的一些心得
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>过年的时候阿里微信的红包大战打的火热，产品也准备蹭个热点，搞了一个活动页，仿阿里的咻一咻。</p>
+<p>声音播放用的是jwplayer,有点杀鸡用牛刀的感觉，没办法，特殊原因必须需要支持Chrome/25.0.1364.172，<code>&lt;audio&gt;</code>如此方便的标签只能看不能用，让我先哭会去。<br><a id="more"></a><br>jwplayer用的是6.8版本，最新的7.3版本在官方注册后就能无水印使用了，6.8的话，需要自己DIY一下，将logo.png指向到本地加载。</p>
+<p>6.8以后的版本除了水印问题，另外还会去请求p.jwpcdn.com下面的jwpsrv.js文件，而这个域名在国外，可能会受到干扰，从而导致打开速度变慢。</p>
+<p>修改方式：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">q.repo = <span class="keyword">function</span>() &#123;</div><div class="line">    <span class="regexp">//</span> var t = <span class="string">"http://p.jwpcdn.com/"</span> + g.version.split(<span class="regexp">/\W/</span>).splice(<span class="number">0</span>, <span class="number">2</span>).join(<span class="string">"/"</span>) + <span class="string">"/"</span>;</div><div class="line">    <span class="regexp">//</span> try &#123;</div><div class="line">    <span class="regexp">//</span>     <span class="keyword">if</span> (q.isHTTPS()) &#123;</div><div class="line">    <span class="regexp">//</span>         t = t.replace(<span class="string">"http://"</span>, <span class="string">"https://ssl."</span>)</div><div class="line">    <span class="regexp">//</span>     &#125;</div><div class="line">    <span class="regexp">//</span> &#125; catch (u) &#123;</div><div class="line">    <span class="regexp">//</span> &#125;</div><div class="line">    var t = <span class="string">"./"</span>;  <span class="regexp">//</span>修改为本地获取相关资源</div><div class="line">    return t</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>在使用中也要注意,即使将播放器的长宽设置为0,在播放时,播放的控制按钮还是会出现的,所以可以将播放器所在的元素移到不可见的区域做隐藏处理<br><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//初始化播放器</span></div><div class="line"><span class="selector-tag">jwplayer</span>(<span class="string">"player"</span>)<span class="selector-class">.setup</span>(&#123;</div><div class="line">    <span class="attribute">file</span>: <span class="string">"voice.mp3"</span>,</div><div class="line">    <span class="attribute">width</span>: <span class="number">0</span>,</div><div class="line">    <span class="attribute">height</span>: <span class="number">0</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>如果是Windows平台，jwplayer在低版本的浏览器上还是需要flash对应版本的支持的，如果没有安装flash或者flash版本过低，播放将会失败，就需要使用其他的方式规避这个问题了。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 检查flash版本</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">flashChecker</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> hasFlash = <span class="number">0</span>;　　　　 <span class="comment">//是否安装了flash</span></div><div class="line">    <span class="keyword">var</span> flashVersion = <span class="number">0</span>;　　 <span class="comment">//flash版本</span></div><div class="line"></div><div class="line">    <span class="keyword">if</span> (<span class="built_in">document</span>.all) &#123;</div><div class="line">        <span class="keyword">var</span> swf = <span class="keyword">new</span> ActiveXObject(<span class="string">'ShockwaveFlash.ShockwaveFlash'</span>);</div><div class="line">        <span class="keyword">if</span> (swf) &#123;</div><div class="line">            hasFlash = <span class="number">1</span>;</div><div class="line">            VSwf = swf.GetVariable(<span class="string">"$version"</span>);</div><div class="line">            flashVersion = <span class="built_in">parseInt</span>(VSwf.split(<span class="string">" "</span>)[<span class="number">1</span>].split(<span class="string">","</span>)[<span class="number">0</span>]);</div><div class="line">        &#125;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">if</span> (navigator.plugins &amp;&amp; navigator.plugins.length &gt; <span class="number">0</span>) &#123;</div><div class="line">            <span class="keyword">var</span> swf2 = navigator.plugins[<span class="string">"Shockwave Flash"</span>];</div><div class="line">            <span class="keyword">if</span> (swf2) &#123;</div><div class="line">                hasFlash = <span class="number">1</span>;</div><div class="line">                <span class="keyword">var</span> words = swf2.description.split(<span class="string">" "</span>);</div><div class="line">                <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; words.length; ++i) &#123;</div><div class="line">                    <span class="keyword">if</span> (<span class="built_in">isNaN</span>(<span class="built_in">parseInt</span>(words[i]))) <span class="keyword">continue</span>;</div><div class="line">                    flashVersion = <span class="built_in">parseInt</span>(words[i]);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        <span class="attr">f</span>: hasFlash,</div><div class="line">        <span class="attr">v</span>: flashVersion</div><div class="line">    &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://idealife.github.io/2016/04/05/jwplayer的一些心得/" data-id="cj7d3jytl001c1f6rw5vljjpq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jwplayer/">jwplayer</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/06/09/Qml中单例的使用/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Qml中单例的使用
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/03/26/理解JavaScript中的Null和Undefined/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">理解JavaScript中的Null和Undefined</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Qml/">Qml</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iDev/">iDev</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/系统/">系统</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apple-Watch/">Apple Watch</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Grunt/">Grunt</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac-OS-X/">Mac OS X</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NodeJs/">NodeJs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qml/">Qml</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt/">Qt</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VS-Code/">VS Code</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/">Xcode</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xib/">Xib</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jwplayer/">jwplayer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/watchOS2-0/">watchOS2.0</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/调试/">调试</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Apple-Watch/" style="font-size: 12.5px;">Apple Watch</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Grunt/" style="font-size: 10px;">Grunt</a> <a href="/tags/Hexo/" style="font-size: 12.5px;">Hexo</a> <a href="/tags/JavaScript/" style="font-size: 12.5px;">JavaScript</a> <a href="/tags/Mac-OS-X/" style="font-size: 12.5px;">Mac OS X</a> <a href="/tags/NodeJs/" style="font-size: 10px;">NodeJs</a> <a href="/tags/Qml/" style="font-size: 17.5px;">Qml</a> <a href="/tags/Qt/" style="font-size: 10px;">Qt</a> <a href="/tags/VS-Code/" style="font-size: 10px;">VS Code</a> <a href="/tags/Xcode/" style="font-size: 20px;">Xcode</a> <a href="/tags/Xib/" style="font-size: 15px;">Xib</a> <a href="/tags/jwplayer/" style="font-size: 10px;">jwplayer</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/watchOS2-0/" style="font-size: 10px;">watchOS2.0</a> <a href="/tags/调试/" style="font-size: 12.5px;">调试</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/08/24/NPM包管理中的陷阱/">NPM包管理中的陷阱</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/29/VS-Code中的插件以及相关配置/">VS Code中的插件以及相关配置</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/03/Hexo站点的一些配制总结/">Hexo站点的一些配制总结</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/20/XP系统中，客户端软件导致系统不能正常访问网络的问题记录/">XP系统中，客户端软件导致系统不能正常访问网络的问题记录</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/16/时间组件和日期组件/">时间组件和日期组件</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+    <div class="widget-wrap">
+        <h3 class="widget-title">友情链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li class='link'>
+                        <a href='http://blog.csdn.net/qustdong'>
+                            QustDong&#39;s Blog
+                        </a>
+                    </li>
+                    
+            </ul>
+        </div>
+    </div>
+    
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Dong<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Node.js的模块加载顺序 | iDealife</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Node.js的模块的载入及缓存机制如下：1）载入内置模块（A Core Module）2）载入文件模块（A File Module）3）载入文件目录模块（A Folder Module）4）载入node_modules里的模块5）自动缓存已载入模块。 如果模块名不是路径，也不是内置模块，Node将试图去当前目录的node_modules文件夹里搜索。如果当前目录的node_modules里没有找">
+<meta name="keywords" content="NodeJs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Node.js的模块加载顺序">
+<meta property="og:url" content="http://idealife.github.io/2016/01/19/Node-js的模块加载顺序/index.html">
+<meta property="og:site_name" content="iDealife">
+<meta property="og:description" content="Node.js的模块的载入及缓存机制如下：1）载入内置模块（A Core Module）2）载入文件模块（A File Module）3）载入文件目录模块（A Folder Module）4）载入node_modules里的模块5）自动缓存已载入模块。 如果模块名不是路径，也不是内置模块，Node将试图去当前目录的node_modules文件夹里搜索。如果当前目录的node_modules里没有找">
+<meta property="og:image" content="http://idealife.github.io/img/201601/1-1.png">
+<meta property="og:updated_time" content="2017-07-16T06:58:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Node.js的模块加载顺序">
+<meta name="twitter:description" content="Node.js的模块的载入及缓存机制如下：1）载入内置模块（A Core Module）2）载入文件模块（A File Module）3）载入文件目录模块（A Folder Module）4）载入node_modules里的模块5）自动缓存已载入模块。 如果模块名不是路径，也不是内置模块，Node将试图去当前目录的node_modules文件夹里搜索。如果当前目录的node_modules里没有找">
+<meta name="twitter:image" content="http://idealife.github.io/img/201601/1-1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="iDealife" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-101836695-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">iDealife</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Stay hungry, Stay foolish.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://idealife.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Node-js的模块加载顺序" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/01/19/Node-js的模块加载顺序/" class="article-date">
+  <time datetime="2016-01-19T14:54:23.000Z" itemprop="datePublished">2016-01-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/前端/">前端</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Node.js的模块加载顺序
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Node.js的模块的载入及缓存机制如下：<br>1）载入内置模块（A Core Module）<br>2）载入文件模块（A File Module）<br>3）载入文件目录模块（A Folder Module）<br>4）载入node_modules里的模块<br>5）自动缓存已载入模块。</p>
+<p>如果模块名不是路径，也不是内置模块，Node将试图去当前目录的node_modules文件夹里搜索。如果当前目录的node_modules里没有找到，Node会从父目录的node_modules里搜索，这样递归下去直到根目录。<br>可以在项目目录下使用 node 命令（已在路径<code>C:\Users\xxx&gt;</code>为例），然后输入 global.module.paths查看Node.js加载node_modules模块的顺序。<br><a id="more"></a><br><img src="/img/201601/1-1.png" alt="路径"></p>
+<p>这里重点说明一下require载入文件模块和文件目录模块的相关机制：</p>
+<p>1、优先载入文件模块，一般使用的是相对路径（也可以用绝对路径），如：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> myMod = <span class="built_in">require</span>(<span class="string">'./my_mod'</span>)  <span class="comment">//js的后缀可以省略</span></div></pre></td></tr></table></figure></p>
+<p>2、当对应文件没找到的时候，开始找文件夹。Node将搜索整个my_mod目录，Node会假设my_mod为一个包并试图找到包定义文件package.json。如果my_mod目录里没有包含package.json文件，Node会假设默认主文件为index.js，即会加载index.js。如果index.js也不存在，那么加载将失败。如果有package.json，则会找package.json中<code>main</code>属性对应的值，如：<code>&quot;main&quot;: &quot;mod.js</code></p>
+<h4 id="额外再讲点npm–save-–save-dev的区别"><a href="#额外再讲点npm–save-–save-dev的区别" class="headerlink" title="额外再讲点npm–save –save-dev的区别"></a>额外再讲点npm–save –save-dev的区别</h4><p>-save和save-dev可以省掉你手动修改package.json文件的步骤。</p>
+<p>npm install module-name -save 自动把模块和版本号添加到dependencies部分，</p>
+<p>npm install module-name -save-dev 自动把模块和版本号添加到devdependencies部分。</p>
+<p>至于配置文件区分这俩部分， 是用于区别开发依赖模块和产品依赖模块，再做单个module的时候可能体验不到两者的差异。</p>
+<p>但当前模块A变成其他模块的依赖，在其他模块的主目录中执行npm install 时，只会下载A的dependencies下的依赖。如果此时进入到这个A模块的主目录中，执行npm install时，才会把devdependencies的依赖下载下来，方便你对A模块进行调试相关的工作。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://idealife.github.io/2016/01/19/Node-js的模块加载顺序/" data-id="cj7d3jytc000z1f6rzx28b792" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NodeJs/">NodeJs</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/02/03/Grunt配置的相关备忘/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Grunt配置的相关备忘
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/12/22/跨域问题/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">跨域问题</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Qml/">Qml</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iDev/">iDev</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/系统/">系统</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apple-Watch/">Apple Watch</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Grunt/">Grunt</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac-OS-X/">Mac OS X</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NodeJs/">NodeJs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qml/">Qml</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt/">Qt</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VS-Code/">VS Code</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/">Xcode</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xib/">Xib</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jwplayer/">jwplayer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/watchOS2-0/">watchOS2.0</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/调试/">调试</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Apple-Watch/" style="font-size: 12.5px;">Apple Watch</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Grunt/" style="font-size: 10px;">Grunt</a> <a href="/tags/Hexo/" style="font-size: 12.5px;">Hexo</a> <a href="/tags/JavaScript/" style="font-size: 12.5px;">JavaScript</a> <a href="/tags/Mac-OS-X/" style="font-size: 12.5px;">Mac OS X</a> <a href="/tags/NodeJs/" style="font-size: 10px;">NodeJs</a> <a href="/tags/Qml/" style="font-size: 17.5px;">Qml</a> <a href="/tags/Qt/" style="font-size: 10px;">Qt</a> <a href="/tags/VS-Code/" style="font-size: 10px;">VS Code</a> <a href="/tags/Xcode/" style="font-size: 20px;">Xcode</a> <a href="/tags/Xib/" style="font-size: 15px;">Xib</a> <a href="/tags/jwplayer/" style="font-size: 10px;">jwplayer</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/watchOS2-0/" style="font-size: 10px;">watchOS2.0</a> <a href="/tags/调试/" style="font-size: 12.5px;">调试</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/08/24/NPM包管理中的陷阱/">NPM包管理中的陷阱</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/29/VS-Code中的插件以及相关配置/">VS Code中的插件以及相关配置</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/03/Hexo站点的一些配制总结/">Hexo站点的一些配制总结</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/20/XP系统中，客户端软件导致系统不能正常访问网络的问题记录/">XP系统中，客户端软件导致系统不能正常访问网络的问题记录</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/16/时间组件和日期组件/">时间组件和日期组件</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+    <div class="widget-wrap">
+        <h3 class="widget-title">友情链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li class='link'>
+                        <a href='http://blog.csdn.net/qustdong'>
+                            QustDong&#39;s Blog
+                        </a>
+                    </li>
+                    
+            </ul>
+        </div>
+    </div>
+    
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Dong<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

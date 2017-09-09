@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>NPM包管理中的陷阱 | iDealife</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="随着前端生态欣欣向荣的不断发展，NPM1️已成为了最大包管理分发平台。但是问题也越来越多，比如一年前的left-pad事件，导致了大量的项目无法正常运行，正因为如此又出现了yarn，准备纠正一些问题。 最近接手了一个旧的项目，顺利的踩到了NPM中的一个坑，记录这次采坑经历，为今后时时敲响警钟。项目中用到了dcodeIO/protobuf.js这个库解析数据，因为用到了json的描述文件，因此采用了">
+<meta name="keywords" content="npm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NPM包管理中的陷阱">
+<meta property="og:url" content="http://idealife.github.io/2017/08/24/NPM包管理中的陷阱/index.html">
+<meta property="og:site_name" content="iDealife">
+<meta property="og:description" content="随着前端生态欣欣向荣的不断发展，NPM1️已成为了最大包管理分发平台。但是问题也越来越多，比如一年前的left-pad事件，导致了大量的项目无法正常运行，正因为如此又出现了yarn，准备纠正一些问题。 最近接手了一个旧的项目，顺利的踩到了NPM中的一个坑，记录这次采坑经历，为今后时时敲响警钟。项目中用到了dcodeIO/protobuf.js这个库解析数据，因为用到了json的描述文件，因此采用了">
+<meta property="og:image" content="http://idealife.github.io/img/201708/1-1.png">
+<meta property="og:image" content="http://idealife.github.io/img/201708/2-1.png">
+<meta property="og:updated_time" content="2017-09-09T10:15:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NPM包管理中的陷阱">
+<meta name="twitter:description" content="随着前端生态欣欣向荣的不断发展，NPM1️已成为了最大包管理分发平台。但是问题也越来越多，比如一年前的left-pad事件，导致了大量的项目无法正常运行，正因为如此又出现了yarn，准备纠正一些问题。 最近接手了一个旧的项目，顺利的踩到了NPM中的一个坑，记录这次采坑经历，为今后时时敲响警钟。项目中用到了dcodeIO/protobuf.js这个库解析数据，因为用到了json的描述文件，因此采用了">
+<meta name="twitter:image" content="http://idealife.github.io/img/201708/1-1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="iDealife" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-101836695-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">iDealife</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Stay hungry, Stay foolish.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://idealife.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-NPM包管理中的陷阱" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/24/NPM包管理中的陷阱/" class="article-date">
+  <time datetime="2017-08-24T09:31:14.000Z" itemprop="datePublished">2017-08-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/前端/">前端</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      NPM包管理中的陷阱
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>随着前端生态欣欣向荣的不断发展，NPM1️已成为了最大包管理分发平台。<br>但是问题也越来越多，比如一年前的left-pad事件，导致了大量的项目无法正常运行，正因为如此又出现了yarn，准备纠正一些问题。</p>
+<p>最近接手了一个旧的项目，顺利的踩到了NPM中的一个坑，记录这次采坑经历，为今后时时敲响警钟。<br>项目中用到了<a href="https://github.com/dcodeIO/protobuf.js" target="_blank" rel="external">dcodeIO/protobuf.js</a>这个库解析数据，因为用到了json的描述文件，因此采用了<code>light library</code>方式进行使用。<br><a id="more"></a><br>以前这个项目一直很稳定的在使用者，但是我接手后运行，却无法进行正常的pb解析了，我想一定是我的“打开方式”有问题，尝试了N久无果，然后通过控制台的报错信息去定位具体的原因。<br><img src="/img/201708/1-1.png" alt=""><br>断点发现上面获取到的$protobuf对象，竟然是用到了<code>minimal</code>的库，又一遍遍的检查代码，也请教了之前开发的同事，验证了代码的使用上没有问题。</p>
+<p>于是就将怀疑的目标转向到了protobuf.js这个库上了。<br>果然在GitHub上发现了蛛丝马迹。作者在2017年7月11号的时候修正了一个bug,如下<img src="/img/201708/2-1.png" alt=""><br>而之前版本是针对json-module,竟然依赖的是<code>minimal</code>的库，可见作者已经修复了这个问题，但是6月10日发布的6.8.0版本中顺利的带着这个bug发布了，可能是<code>light</code>方式使用的人不多，并没有被及时的发现并纠正。</p>
+<p>我这是一个年初的项目，怎么会用到了最新release的6.8.0版本的依赖呢？</p>
+<p>这个就得从NPM的包管理方式说起了。我们在package.json中的包依赖中经常能见到<code>~</code>和<code>^</code>这两个标记，具体含义可以见这里<a href="https://stackoverflow.com/questions/22343224/whats-the-difference-between-tilde-and-caret-in-package-json" target="_blank" rel="external">二者的区别</a>。</p>
+<p>一般开发阶段，我们安装包都是 <code>npm i xxx -D</code>这种方式，包管理往往会自动帮我们加上<code>^</code>这个标记，比如用到的protobuf.js的版本号是<code>^6.7.3</code>。那么意味着当官方发布6.8.0版本后，我再进行包安装的话，就会给我安装上6.8.0这个带bug的版本，从而引发了一系列不可预知的问题。要绕开上面我遇到的这个问题的话，我们则需要卸载6.8.0版本，然后在package.json中将6.7.3前面的^去掉，强制指定规定的版本。</p>
+<p>理论上来说保持新版本依赖的使用可以帮忙修复原先的问题，但是也会引入新的bug,并不是意味着越新越好，在实际项目中还是追求稳定。因此可以在安装依赖的过程中强制指定版本或者试试新的yarn。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://idealife.github.io/2017/08/24/NPM包管理中的陷阱/" data-id="cj7d426k5003d1f6rb8po7snj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/npm/">npm</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/06/29/VS-Code中的插件以及相关配置/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">VS Code中的插件以及相关配置</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Qml/">Qml</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iDev/">iDev</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/系统/">系统</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apple-Watch/">Apple Watch</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Grunt/">Grunt</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac-OS-X/">Mac OS X</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NodeJs/">NodeJs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qml/">Qml</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt/">Qt</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VS-Code/">VS Code</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/">Xcode</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xib/">Xib</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jwplayer/">jwplayer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/watchOS2-0/">watchOS2.0</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/调试/">调试</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Apple-Watch/" style="font-size: 12.5px;">Apple Watch</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Grunt/" style="font-size: 10px;">Grunt</a> <a href="/tags/Hexo/" style="font-size: 12.5px;">Hexo</a> <a href="/tags/JavaScript/" style="font-size: 12.5px;">JavaScript</a> <a href="/tags/Mac-OS-X/" style="font-size: 12.5px;">Mac OS X</a> <a href="/tags/NodeJs/" style="font-size: 10px;">NodeJs</a> <a href="/tags/Qml/" style="font-size: 17.5px;">Qml</a> <a href="/tags/Qt/" style="font-size: 10px;">Qt</a> <a href="/tags/VS-Code/" style="font-size: 10px;">VS Code</a> <a href="/tags/Xcode/" style="font-size: 20px;">Xcode</a> <a href="/tags/Xib/" style="font-size: 15px;">Xib</a> <a href="/tags/jwplayer/" style="font-size: 10px;">jwplayer</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/watchOS2-0/" style="font-size: 10px;">watchOS2.0</a> <a href="/tags/调试/" style="font-size: 12.5px;">调试</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/08/24/NPM包管理中的陷阱/">NPM包管理中的陷阱</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/29/VS-Code中的插件以及相关配置/">VS Code中的插件以及相关配置</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/03/Hexo站点的一些配制总结/">Hexo站点的一些配制总结</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/20/XP系统中，客户端软件导致系统不能正常访问网络的问题记录/">XP系统中，客户端软件导致系统不能正常访问网络的问题记录</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/16/时间组件和日期组件/">时间组件和日期组件</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+    <div class="widget-wrap">
+        <h3 class="widget-title">友情链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li class='link'>
+                        <a href='http://blog.csdn.net/qustdong'>
+                            QustDong&#39;s Blog
+                        </a>
+                    </li>
+                    
+            </ul>
+        </div>
+    </div>
+    
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Dong<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
