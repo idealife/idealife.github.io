@@ -5,19 +5,19 @@
   
   <title>NPM包管理中的陷阱 | iDealife</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="随着前端生态欣欣向荣的不断发展，NPM1️已成为了最大包管理分发平台。但是问题也越来越多，比如一年前的left-pad事件，导致了大量的项目无法正常运行，正因为如此又出现了yarn，准备纠正一些问题。 最近接手了一个旧的项目，顺利的踩到了NPM中的一个坑，记录这次采坑经历，为今后时时敲响警钟。项目中用到了dcodeIO/protobuf.js这个库解析数据，因为用到了json的描述文件，因此采用了">
+  <meta name="description" content="随着前端生态不断欣欣向荣的发展，NPM已成为了最大包管理分发平台。但是问题也越来越多，比如一年前的left-pad事件，导致了大量的项目无法正常运行，正因为如此又出现了yarn，准备纠正一些问题。 最近接手了一个旧的项目，顺利的踩到了NPM中的一个坑，记录这次采坑经历，为今后时时敲响警钟。项目中用到了dcodeIO/protobuf.js这个库解析数据，因为用到了json的描述文件，因此采用了li">
 <meta name="keywords" content="npm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="NPM包管理中的陷阱">
 <meta property="og:url" content="http://idealife.github.io/2017/08/24/NPM包管理中的陷阱/index.html">
 <meta property="og:site_name" content="iDealife">
-<meta property="og:description" content="随着前端生态欣欣向荣的不断发展，NPM1️已成为了最大包管理分发平台。但是问题也越来越多，比如一年前的left-pad事件，导致了大量的项目无法正常运行，正因为如此又出现了yarn，准备纠正一些问题。 最近接手了一个旧的项目，顺利的踩到了NPM中的一个坑，记录这次采坑经历，为今后时时敲响警钟。项目中用到了dcodeIO/protobuf.js这个库解析数据，因为用到了json的描述文件，因此采用了">
+<meta property="og:description" content="随着前端生态不断欣欣向荣的发展，NPM已成为了最大包管理分发平台。但是问题也越来越多，比如一年前的left-pad事件，导致了大量的项目无法正常运行，正因为如此又出现了yarn，准备纠正一些问题。 最近接手了一个旧的项目，顺利的踩到了NPM中的一个坑，记录这次采坑经历，为今后时时敲响警钟。项目中用到了dcodeIO/protobuf.js这个库解析数据，因为用到了json的描述文件，因此采用了li">
 <meta property="og:image" content="http://idealife.github.io/img/201708/1-1.png">
 <meta property="og:image" content="http://idealife.github.io/img/201708/2-1.png">
-<meta property="og:updated_time" content="2017-09-09T10:15:40.000Z">
+<meta property="og:updated_time" content="2017-09-09T12:44:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NPM包管理中的陷阱">
-<meta name="twitter:description" content="随着前端生态欣欣向荣的不断发展，NPM1️已成为了最大包管理分发平台。但是问题也越来越多，比如一年前的left-pad事件，导致了大量的项目无法正常运行，正因为如此又出现了yarn，准备纠正一些问题。 最近接手了一个旧的项目，顺利的踩到了NPM中的一个坑，记录这次采坑经历，为今后时时敲响警钟。项目中用到了dcodeIO/protobuf.js这个库解析数据，因为用到了json的描述文件，因此采用了">
+<meta name="twitter:description" content="随着前端生态不断欣欣向荣的发展，NPM已成为了最大包管理分发平台。但是问题也越来越多，比如一年前的left-pad事件，导致了大量的项目无法正常运行，正因为如此又出现了yarn，准备纠正一些问题。 最近接手了一个旧的项目，顺利的踩到了NPM中的一个坑，记录这次采坑经历，为今后时时敲响警钟。项目中用到了dcodeIO/protobuf.js这个库解析数据，因为用到了json的描述文件，因此采用了li">
 <meta name="twitter:image" content="http://idealife.github.io/img/201708/1-1.png">
   
     <link rel="alternate" href="/atom.xml" title="iDealife" type="application/atom+xml">
@@ -112,7 +112,7 @@ ga('send', 'pageview');
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>随着前端生态欣欣向荣的不断发展，NPM1️已成为了最大包管理分发平台。<br>但是问题也越来越多，比如一年前的left-pad事件，导致了大量的项目无法正常运行，正因为如此又出现了yarn，准备纠正一些问题。</p>
+        <p>随着前端生态不断欣欣向荣的发展，NPM已成为了最大包管理分发平台。<br>但是问题也越来越多，比如一年前的left-pad事件，导致了大量的项目无法正常运行，正因为如此又出现了yarn，准备纠正一些问题。</p>
 <p>最近接手了一个旧的项目，顺利的踩到了NPM中的一个坑，记录这次采坑经历，为今后时时敲响警钟。<br>项目中用到了<a href="https://github.com/dcodeIO/protobuf.js" target="_blank" rel="external">dcodeIO/protobuf.js</a>这个库解析数据，因为用到了json的描述文件，因此采用了<code>light library</code>方式进行使用。<br><a id="more"></a><br>以前这个项目一直很稳定的在使用者，但是我接手后运行，却无法进行正常的pb解析了，我想一定是我的“打开方式”有问题，尝试了N久无果，然后通过控制台的报错信息去定位具体的原因。<br><img src="/img/201708/1-1.png" alt=""><br>断点发现上面获取到的$protobuf对象，竟然是用到了<code>minimal</code>的库，又一遍遍的检查代码，也请教了之前开发的同事，验证了代码的使用上没有问题。</p>
 <p>于是就将怀疑的目标转向到了protobuf.js这个库上了。<br>果然在GitHub上发现了蛛丝马迹。作者在2017年7月11号的时候修正了一个bug,如下<img src="/img/201708/2-1.png" alt=""><br>而之前版本是针对json-module,竟然依赖的是<code>minimal</code>的库，可见作者已经修复了这个问题，但是6月10日发布的6.8.0版本中顺利的带着这个bug发布了，可能是<code>light</code>方式使用的人不多，并没有被及时的发现并纠正。</p>
 <p>我这是一个年初的项目，怎么会用到了最新release的6.8.0版本的依赖呢？</p>
@@ -123,7 +123,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://idealife.github.io/2017/08/24/NPM包管理中的陷阱/" data-id="cj7dawyxw000de46rx7ss2noc" class="article-share-link">Share</a>
+      <a data-url="http://idealife.github.io/2017/08/24/NPM包管理中的陷阱/" data-id="cj7dayoai000dgi6r64eooh6e" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/npm/">npm</a></li></ul>
