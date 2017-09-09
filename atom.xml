@@ -40,6 +40,29 @@
   </entry>
   
   <entry>
+    <title>从ES6的扩展运算符Spread operator说起</title>
+    <link href="http://idealife.github.io/2017/07/09/%E4%BB%8EES6%E7%9A%84%E6%89%A9%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6Spread-operator%E8%AF%B4%E8%B5%B7/"/>
+    <id>http://idealife.github.io/2017/07/09/从ES6的扩展运算符Spread-operator说起/</id>
+    <published>2017-07-09T13:05:14.000Z</published>
+    <updated>2017-09-09T14:10:17.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>扩展运算符（spread）是三个点（…）。它好比 rest 参数的逆运算，将一个数组转为用逗号分隔的参数序列。<br>这个是ES6中的一个新特性，大大简化了代码。</p><p>ES6中的扩展运算符通过Babel，会转化如下的ES5代码。<br><a id="more"></a><br><img src="/img/201707/1-1.png" alt=""></p><p>很明显，上面的代码告诉我们扩展运算符后面的参数如果是数组的话，则通过数据遍历的方式返回新的数组。如果不是数组类型的话，则通过Array.from返回新的数组。</p><p>上面是大概的基础知识铺垫，那么下面问题就来了。</p><p>Array.from方法用于将两类对象转为真正的数组：类似数组的对象（array-like object）和可遍历（iterable）的对象（包括ES6新增的数据结构Set和Map）。这个也是ES6的新特性，浏览器的支持也不是很广泛，Babel的这种做法无疑是给我们埋了一个很大的雷，随时会爆炸。</p><p>今天这个雷被我踩上了。线上的项目有部分用户的手机页面打不开，查了发现报的异常是<code>undefined is not a function (evaluating &#39;Array.from(arr)&#39;)</code>。<br>最终定位的地方是对Uint8Array使用了扩展操作符，虽然我们觉得这个也是一个数组，但是对于Array.isArray来说，他不是标准的Array数组，返回的是False。从而进了Array.from的坑。</p><p>修改的方式有两种：</p><ul><li>1、增加Array.from的polyfill；</li><li>2、将扩展操作符的代码通过apply的方式化解</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;扩展运算符（spread）是三个点（…）。它好比 rest 参数的逆运算，将一个数组转为用逗号分隔的参数序列。&lt;br&gt;这个是ES6中的一个新特性，大大简化了代码。&lt;/p&gt;
+&lt;p&gt;ES6中的扩展运算符通过Babel，会转化如下的ES5代码。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="前端" scheme="http://idealife.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="ES6" scheme="http://idealife.github.io/tags/ES6/"/>
+    
+  </entry>
+  
+  <entry>
     <title>VS Code中的插件以及相关配置</title>
     <link href="http://idealife.github.io/2017/06/29/VS-Code%E4%B8%AD%E7%9A%84%E6%8F%92%E4%BB%B6%E4%BB%A5%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE/"/>
     <id>http://idealife.github.io/2017/06/29/VS-Code中的插件以及相关配置/</id>
@@ -462,33 +485,6 @@ A ListView has a model, which defines the data to be displayed, and a delegate, 
     
     
       <category term="Xcode" scheme="http://idealife.github.io/tags/Xcode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MacOS App手动签名打包方法</title>
-    <link href="http://idealife.github.io/2015/11/18/MacOS-App%E6%89%8B%E5%8A%A8%E7%AD%BE%E5%90%8D%E6%89%93%E5%8C%85%E6%96%B9%E6%B3%95/"/>
-    <id>http://idealife.github.io/2015/11/18/MacOS-App手动签名打包方法/</id>
-    <published>2015-11-18T06:09:16.000Z</published>
-    <updated>2017-09-09T09:13:54.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>用了跨平台的方案开发App，自然享受不到苹果亲儿子XCode开发带来的便利。<br>比如打包发布等一系列的操作需要我们手工来操作了。</p><p>苹果的安全性与隐私中对于程序分成3类：</p><p>1、Mac App Store;</p><p>2、Mac App Store和被认可的开发者;</p><p>3、任何来源。</p><p>一般用户的设置都是1或2,选3的话安全性就很难保证了。</p><p>针对第1,2种的App, 苹果的证书对应分为2类，一个类Developer开头的开发者证书，一类是3rd开头的App Store发布证书。</p><p>如果不准备上架，或者使用了苹果的私有Api，那么就只能使用开发者证书给App签名了。<br><a id="more"></a><br>签名方式：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/sh</span></div><div class="line"><span class="comment">#  Script.sh</span></div><div class="line"><span class="comment">#  sign</span></div><div class="line"></div><div class="line">path=$(<span class="built_in">cd</span> <span class="string">"<span class="variable">$(dirname "$0")</span>"</span>;<span class="built_in">pwd</span>)</div><div class="line"><span class="built_in">echo</span> <span class="variable">$path</span></div><div class="line"><span class="built_in">cd</span> <span class="variable">$path</span></div><div class="line"></div><div class="line">codesign -f -s <span class="string">"Developer ID Application: Shanghai XXX Limited (88B8QAXTFE)"</span> -v --deep <span class="string">"XXX.app"</span></div><div class="line"></div><div class="line"><span class="built_in">echo</span> -n <span class="string">"检查签名？（y/n）"</span></div><div class="line"></div><div class="line"><span class="built_in">read</span> is_sign</div><div class="line"></div><div class="line"><span class="keyword">if</span> [[ <span class="variable">$is_sign</span>  = <span class="string">"y"</span> ]]; <span class="keyword">then</span></div><div class="line">  spctl --verbose=4 --assess --<span class="built_in">type</span> execute XXX.app</div><div class="line"><span class="keyword">fi</span></div></pre></td></tr></table></figure></p><p>针对上架App Store的方案,需要编写entitlements文件，设置沙盒和访问权限。然后打包成pkg，通过Application Loader上传给Store审核，通过通过后就能对外发布了。</p><p>签名方式：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/sh</span></div><div class="line"><span class="comment">#  Script.sh</span></div><div class="line"><span class="comment">#  sign</span></div><div class="line"></div><div class="line">path=$(<span class="built_in">cd</span> <span class="string">"<span class="variable">$(dirname "$0")</span>"</span>;<span class="built_in">pwd</span>)</div><div class="line"><span class="built_in">echo</span> <span class="variable">$path</span></div><div class="line"><span class="built_in">cd</span> <span class="variable">$path</span></div><div class="line"></div><div class="line">codesign --deep --force --verify --verbose --sign <span class="string">"3rd Party Mac Developer Application: Shanghai XXX Limited (88B8QAXTFE)"</span> --entitlements XXX.entitlements XXX.app</div><div class="line"></div><div class="line"><span class="built_in">echo</span> -n <span class="string">"检查签名？（y/n）"</span></div><div class="line"></div><div class="line"><span class="built_in">read</span> is_sign</div><div class="line"></div><div class="line"><span class="keyword">if</span> [[ <span class="variable">$is_sign</span>  = <span class="string">"y"</span> ]]; <span class="keyword">then</span></div><div class="line">  spctl --verbose=4 --assess --<span class="built_in">type</span> execute XXX.app</div><div class="line"><span class="keyword">fi</span></div><div class="line"></div><div class="line"></div><div class="line">productbuild --component XXX.app /Applications XXX.pkg --sign <span class="string">"3rd Party Mac Developer Installer: Shanghai XXX Limited (88B8QAXTFE)"</span></div></pre></td></tr></table></figure></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;用了跨平台的方案开发App，自然享受不到苹果亲儿子XCode开发带来的便利。&lt;br&gt;比如打包发布等一系列的操作需要我们手工来操作了。&lt;/p&gt;
-&lt;p&gt;苹果的安全性与隐私中对于程序分成3类：&lt;/p&gt;
-&lt;p&gt;1、Mac App Store;&lt;/p&gt;
-&lt;p&gt;2、Mac App Store和被认可的开发者;&lt;/p&gt;
-&lt;p&gt;3、任何来源。&lt;/p&gt;
-&lt;p&gt;一般用户的设置都是1或2,选3的话安全性就很难保证了。&lt;/p&gt;
-&lt;p&gt;针对第1,2种的App, 苹果的证书对应分为2类，一个类Developer开头的开发者证书，一类是3rd开头的App Store发布证书。&lt;/p&gt;
-&lt;p&gt;如果不准备上架，或者使用了苹果的私有Api，那么就只能使用开发者证书给App签名了。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="iDev" scheme="http://idealife.github.io/categories/iDev/"/>
-    
     
   </entry>
   

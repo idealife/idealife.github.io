@@ -3,18 +3,14 @@
 <head>
   <meta charset="utf-8">
   
-  <title>MacOS App手动签名打包方法 | iDealife</title>
+  <title>归档: 2017/7 | iDealife</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="用了跨平台的方案开发App，自然享受不到苹果亲儿子XCode开发带来的便利。比如打包发布等一系列的操作需要我们手工来操作了。 苹果的安全性与隐私中对于程序分成3类： 1、Mac App Store; 2、Mac App Store和被认可的开发者; 3、任何来源。 一般用户的设置都是1或2,选3的话安全性就很难保证了。 针对第1,2种的App, 苹果的证书对应分为2类，一个类Developer开头">
-<meta property="og:type" content="article">
-<meta property="og:title" content="MacOS App手动签名打包方法">
-<meta property="og:url" content="http://idealife.github.io/2015/11/18/MacOS-App手动签名打包方法/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="iDealife">
+<meta property="og:url" content="http://idealife.github.io/archives/2017/07/index.html">
 <meta property="og:site_name" content="iDealife">
-<meta property="og:description" content="用了跨平台的方案开发App，自然享受不到苹果亲儿子XCode开发带来的便利。比如打包发布等一系列的操作需要我们手工来操作了。 苹果的安全性与隐私中对于程序分成3类： 1、Mac App Store; 2、Mac App Store和被认可的开发者; 3、任何来源。 一般用户的设置都是1或2,选3的话安全性就很难保证了。 针对第1,2种的App, 苹果的证书对应分为2类，一个类Developer开头">
-<meta property="og:updated_time" content="2017-09-09T09:13:54.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MacOS App手动签名打包方法">
-<meta name="twitter:description" content="用了跨平台的方案开发App，自然享受不到苹果亲儿子XCode开发带来的便利。比如打包发布等一系列的操作需要我们手工来操作了。 苹果的安全性与隐私中对于程序分成3类： 1、Mac App Store; 2、Mac App Store和被认可的开发者; 3、任何来源。 一般用户的设置都是1或2,选3的话安全性就很难保证了。 针对第1,2种的App, 苹果的证书对应分为2类，一个类Developer开头">
+<meta name="twitter:title" content="iDealife">
   
     <link rel="alternate" href="/atom.xml" title="iDealife" type="application/atom+xml">
   
@@ -82,76 +78,44 @@ ga('send', 'pageview');
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-MacOS-App手动签名打包方法" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/11/18/MacOS-App手动签名打包方法/" class="article-date">
-  <time datetime="2015-11-18T06:09:16.000Z" itemprop="datePublished">2015-11-18</time>
+        <section id="main">
+                    
+                        
+                            
+                                
+                                    
+                                            
+                                                <section class="archives-wrap">
+                                                    <div class="archive-year-wrap">
+                                                        <a href="/archives/2017" class="archive-year">
+                                                            2017
+                                                        </a>
+                                                    </div>
+                                                    <div class="archives">
+                                                        
+                                                            <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/07/09/从ES6的扩展运算符Spread-operator说起/" class="archive-article-date">
+  <time datetime="2017-07-09T13:05:14.000Z" itemprop="datePublished">7月 9</time>
 </a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/iDev/">iDev</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+      
   
-    <h1 class="article-title" itemprop="name">
-      MacOS App手动签名打包方法
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/07/09/从ES6的扩展运算符Spread-operator说起/">从ES6的扩展运算符Spread operator说起</a>
     </h1>
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>用了跨平台的方案开发App，自然享受不到苹果亲儿子XCode开发带来的便利。<br>比如打包发布等一系列的操作需要我们手工来操作了。</p>
-<p>苹果的安全性与隐私中对于程序分成3类：</p>
-<p>1、Mac App Store;</p>
-<p>2、Mac App Store和被认可的开发者;</p>
-<p>3、任何来源。</p>
-<p>一般用户的设置都是1或2,选3的话安全性就很难保证了。</p>
-<p>针对第1,2种的App, 苹果的证书对应分为2类，一个类Developer开头的开发者证书，一类是3rd开头的App Store发布证书。</p>
-<p>如果不准备上架，或者使用了苹果的私有Api，那么就只能使用开发者证书给App签名了。<br><a id="more"></a><br>签名方式：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/sh</span></div><div class="line"><span class="comment">#  Script.sh</span></div><div class="line"><span class="comment">#  sign</span></div><div class="line"></div><div class="line">path=$(<span class="built_in">cd</span> <span class="string">"<span class="variable">$(dirname "$0")</span>"</span>;<span class="built_in">pwd</span>)</div><div class="line"><span class="built_in">echo</span> <span class="variable">$path</span></div><div class="line"><span class="built_in">cd</span> <span class="variable">$path</span></div><div class="line"></div><div class="line">codesign -f -s <span class="string">"Developer ID Application: Shanghai XXX Limited (88B8QAXTFE)"</span> -v --deep <span class="string">"XXX.app"</span></div><div class="line"></div><div class="line"><span class="built_in">echo</span> -n <span class="string">"检查签名？（y/n）"</span></div><div class="line"></div><div class="line"><span class="built_in">read</span> is_sign</div><div class="line"></div><div class="line"><span class="keyword">if</span> [[ <span class="variable">$is_sign</span>  = <span class="string">"y"</span> ]]; <span class="keyword">then</span></div><div class="line">  spctl --verbose=4 --assess --<span class="built_in">type</span> execute XXX.app</div><div class="line"><span class="keyword">fi</span></div></pre></td></tr></table></figure></p>
-<p>针对上架App Store的方案,需要编写entitlements文件，设置沙盒和访问权限。然后打包成pkg，通过Application Loader上传给Store审核，通过通过后就能对外发布了。</p>
-<p>签名方式：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/sh</span></div><div class="line"><span class="comment">#  Script.sh</span></div><div class="line"><span class="comment">#  sign</span></div><div class="line"></div><div class="line">path=$(<span class="built_in">cd</span> <span class="string">"<span class="variable">$(dirname "$0")</span>"</span>;<span class="built_in">pwd</span>)</div><div class="line"><span class="built_in">echo</span> <span class="variable">$path</span></div><div class="line"><span class="built_in">cd</span> <span class="variable">$path</span></div><div class="line"></div><div class="line">codesign --deep --force --verify --verbose --sign <span class="string">"3rd Party Mac Developer Application: Shanghai XXX Limited (88B8QAXTFE)"</span> --entitlements XXX.entitlements XXX.app</div><div class="line"></div><div class="line"><span class="built_in">echo</span> -n <span class="string">"检查签名？（y/n）"</span></div><div class="line"></div><div class="line"><span class="built_in">read</span> is_sign</div><div class="line"></div><div class="line"><span class="keyword">if</span> [[ <span class="variable">$is_sign</span>  = <span class="string">"y"</span> ]]; <span class="keyword">then</span></div><div class="line">  spctl --verbose=4 --assess --<span class="built_in">type</span> execute XXX.app</div><div class="line"><span class="keyword">fi</span></div><div class="line"></div><div class="line"></div><div class="line">productbuild --component XXX.app /Applications XXX.pkg --sign <span class="string">"3rd Party Mac Developer Installer: Shanghai XXX Limited (88B8QAXTFE)"</span></div></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://idealife.github.io/2015/11/18/MacOS-App手动签名打包方法/" data-id="cj7ddzttm0009pu6rphvke4gq" class="article-share-link">Share</a>
-      
-      
-    </footer>
+    </header>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2015/11/18/Xcode程序本地化设置/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Xcode程序本地化设置
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2015/11/17/NSOutlineView风格设置/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">NSOutlineView风格设置</div>
-    </a>
-  
-</nav>
-
-  
 </article>
-
-</section>
+                                                                
+                                                                    
+                                                    </div>
+                                                </section>
+                                                
+                                                    
+                                                        </section>
         
           <aside id="sidebar">
   

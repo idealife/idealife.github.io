@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://idealife.github.io/2017/07/09/%E4%BB%8EES6%E7%9A%84%E6%89%A9%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6Spread-operator%E8%AF%B4%E8%B5%B7/</loc>
+    
+    <lastmod>2017-09-09T14:10:17.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://idealife.github.io/2017/08/24/NPM%E5%8C%85%E7%AE%A1%E7%90%86%E4%B8%AD%E7%9A%84%E9%99%B7%E9%98%B1/</loc>
     
     <lastmod>2017-09-09T12:44:17.000Z</lastmod>
@@ -30,34 +37,6 @@
   </url>
   
   <url>
-    <loc>http://idealife.github.io/2016/06/09/Qml%E4%B8%AD%E5%8D%95%E4%BE%8B%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
-    
-    <lastmod>2017-09-09T09:13:54.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://idealife.github.io/2016/07/08/Qml%E4%B8%AD%E7%BB%84%E4%BB%B6%E5%B0%81%E8%A3%85/</loc>
-    
-    <lastmod>2017-09-09T09:13:54.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://idealife.github.io/2017/01/20/Qt5-7-Qml%E7%9A%84%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E9%97%AE%E9%A2%98/</loc>
-    
-    <lastmod>2017-09-09T09:13:54.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://idealife.github.io/2015/11/18/MacOS-App%E6%89%8B%E5%8A%A8%E7%AD%BE%E5%90%8D%E6%89%93%E5%8C%85%E6%96%B9%E6%B3%95/</loc>
-    
-    <lastmod>2017-09-09T09:13:54.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://idealife.github.io/2017/02/16/%E6%97%B6%E9%97%B4%E7%BB%84%E4%BB%B6%E5%92%8C%E6%97%A5%E6%9C%9F%E7%BB%84%E4%BB%B6/</loc>
     
     <lastmod>2017-09-09T09:13:54.000Z</lastmod>
@@ -73,6 +52,34 @@
   
   <url>
     <loc>http://idealife.github.io/2016/04/05/jwplayer%E7%9A%84%E4%B8%80%E4%BA%9B%E5%BF%83%E5%BE%97/</loc>
+    
+    <lastmod>2017-09-09T09:13:54.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://idealife.github.io/2016/06/09/Qml%E4%B8%AD%E5%8D%95%E4%BE%8B%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
+    
+    <lastmod>2017-09-09T09:13:54.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://idealife.github.io/2016/07/08/Qml%E4%B8%AD%E7%BB%84%E4%BB%B6%E5%B0%81%E8%A3%85/</loc>
+    
+    <lastmod>2017-09-09T09:13:54.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://idealife.github.io/2015/11/18/MacOS-App%E6%89%8B%E5%8A%A8%E7%AD%BE%E5%90%8D%E6%89%93%E5%8C%85%E6%96%B9%E6%B3%95/</loc>
+    
+    <lastmod>2017-09-09T09:13:54.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://idealife.github.io/2017/01/20/Qt5-7-Qml%E7%9A%84%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E9%97%AE%E9%A2%98/</loc>
     
     <lastmod>2017-09-09T09:13:54.000Z</lastmod>
     
@@ -100,14 +107,7 @@
   </url>
   
   <url>
-    <loc>http://idealife.github.io/2016/01/19/Node-js%E7%9A%84%E6%A8%A1%E5%9D%97%E5%8A%A0%E8%BD%BD%E9%A1%BA%E5%BA%8F/</loc>
-    
-    <lastmod>2017-07-16T06:58:18.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://idealife.github.io/2017/06/03/Hexo%E7%AB%99%E7%82%B9%E7%9A%84%E4%B8%80%E4%BA%9B%E9%85%8D%E5%88%B6%E6%80%BB%E7%BB%93/</loc>
+    <loc>http://idealife.github.io/2016/02/03/Grunt%E9%85%8D%E7%BD%AE%E7%9A%84%E7%9B%B8%E5%85%B3%E5%A4%87%E5%BF%98/</loc>
     
     <lastmod>2017-07-16T06:58:18.000Z</lastmod>
     
@@ -128,7 +128,7 @@
   </url>
   
   <url>
-    <loc>http://idealife.github.io/2016/02/03/Grunt%E9%85%8D%E7%BD%AE%E7%9A%84%E7%9B%B8%E5%85%B3%E5%A4%87%E5%BF%98/</loc>
+    <loc>http://idealife.github.io/2015/12/22/%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/</loc>
     
     <lastmod>2017-07-16T06:58:18.000Z</lastmod>
     
@@ -142,7 +142,14 @@
   </url>
   
   <url>
-    <loc>http://idealife.github.io/2015/12/22/%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/</loc>
+    <loc>http://idealife.github.io/2016/01/19/Node-js%E7%9A%84%E6%A8%A1%E5%9D%97%E5%8A%A0%E8%BD%BD%E9%A1%BA%E5%BA%8F/</loc>
+    
+    <lastmod>2017-07-16T06:58:18.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://idealife.github.io/2017/06/03/Hexo%E7%AB%99%E7%82%B9%E7%9A%84%E4%B8%80%E4%BA%9B%E9%85%8D%E5%88%B6%E6%80%BB%E7%BB%93/</loc>
     
     <lastmod>2017-07-16T06:58:18.000Z</lastmod>
     
